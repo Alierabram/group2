@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Student Profile - Department of Computing and Informatics</title>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+        /* Student Profile Form - Elegant Design */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Inter", "Segoe UI", Arial, sans-serif;
+            background: linear-gradient(135deg, #eef5ff 0%, #ffffff 100%);
+            min-height: 100vh;
+            padding: 2rem 0;
+        }
+
+        /* Hero Section */
+        .profile-hero {
+            background: linear-gradient(135deg, #0f3c78 0%, #072c53 100%);
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .profile-hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 400px;
+            height: 400px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .profile-hero::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -5%;
+            width: 300px;
+            height: 300px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 50%;
+            animation: float 8s ease-in-out infinite reverse;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-30px); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .profile-hero h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .profile-hero p {
+            font-size: 1.2rem;
+            opacity: 0.95;
+            margin: 0;
+        }
+
+        /* Main container */
+        .container {
+            width: min(1000px, 90%);
+            margin: 0 auto;
+        }
+
+        .profile-wrapper {
+            display: grid;
+            grid-template-columns: 350px 1fr;
+            gap: 3rem;
+            margin: 3rem auto;
+            max-width: 1100px;
+            padding: 0 1rem;
+        }
+
+        /* Sidebar - Student Card */
+        .student-card {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 10px 40px rgba(15, 60, 120, 0.1);
+            overflow: hidden;
+            height: fit-content;
+            animation: slideInLeft 0.6s ease-out;
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .student-card-header {
+            background: linear-gradient(135deg, #0f3c78 0%, #1851a9 100%);
+            color: white;
+            padding: 2rem 1.5rem;
+            text-align: center;
+        }
+
+        .student-avatar {
+            width: 80px;
+            height: 80px;
+            background: rgba(255, 255, 255, 0.2);
+            border: 3px solid white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            margin: 0 auto 1rem;
+        }
+
+        .student-card-header h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.3rem;
+            font-weight: 600;
+        }
+
+        .student-status {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.4rem;
+        }
+
+        .status-badge {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background: #4caf50;
+            border-radius: 50%;
+        }
+
+        .student-card-body {
+            padding: 1.5rem;
+        }
+
+        .card-info-group {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .card-info-group:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+
+        .card-label {
+            font-size: 0.85rem;
+            color: #999;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 600;
+            margin-bottom: 0.4rem;
+        }
+
+        .card-value {
+            font-size: 1rem;
+            color: #0d1f44;
+            font-weight: 500;
+        }
+
+        /* Main Form Section */
+        .form-section {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 10px 40px rgba(15, 60, 120, 0.1);
+            padding: 2.5rem;
+            animation: slideInRight 0.6s ease-out;
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .form-header {
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 3px solid #0f3c78;
+        }
+
+        .form-header h2 {
+            color: #0f3c78;
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+        }
+
+        .form-header p {
+            color: #666;
+            font-size: 0.95rem;
+        }
+
+        /* Form Grid */
+        .form-fields {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .form-field {
+            display: flex;
+            flex-direction: column;
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(15px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .form-field:nth-child(1) { animation-delay: 0.1s; }
+        .form-field:nth-child(2) { animation-delay: 0.2s; }
+        .form-field:nth-child(3) { animation-delay: 0.3s; }
+        .form-field:nth-child(4) { animation-delay: 0.4s; }
+
+        .form-field label {
+            font-weight: 600;
+            color: #0f3c78;
+            margin-bottom: 0.7rem;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .required {
+            color: #d32f2f;
+            font-weight: bold;
+        }
+
+        .form-field input,
+        .form-field select {
+            padding: 1rem;
+            border: 2px solid #e0e7f1;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-family: inherit;
+            background: #f8fafc;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .form-field input::placeholder {
+            color: #bbb;
+        }
+
+        .form-field input:focus,
+        .form-field select:focus {
+            outline: none;
+            border-color: #0f3c78;
+            background: white;
+            box-shadow: 0 0 0 6px rgba(15, 60, 120, 0.08),
+                        0 4px 12px rgba(15, 60, 120, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .form-field input:hover:not(:focus),
+        .form-field select:hover:not(:focus) {
+            border-color: #0f3c78;
+            background: white;
+        }
+
+        .field-helper {
+            font-size: 0.8rem;
+            color: #999;
+            margin-top: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .helper-icon {
+            color: #0f3c78;
+            font-weight: bold;
+        }
+
+        /* Full width for email and program */
+        .form-field.full {
+            grid-column: 1 / -1;
+        }
+
+        /* Form Actions */
+        .form-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2.5rem;
+            padding-top: 2rem;
+            border-top: 2px solid #f0f0f0;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 1.1rem 2rem;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.6rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-save {
+            background: linear-gradient(135deg, #0f3c78 0%, #072c53 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(15, 60, 120, 0.3);
+        }
+
+        .btn-save:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(15, 60, 120, 0.4);
+        }
+
+        .btn-cancel {
+            background: white;
+            color: #0f3c78;
+            border: 2px solid #0f3c78;
+        }
+
+        .btn-cancel:hover {
+            background: #f0f6ff;
+            transform: translateY(-2px);
+        }
+
+        /* Success Message */
+        .success-alert {
+            background: linear-gradient(135deg, #e8f5e9 0%, #f1f8e9 100%);
+            border-left: 5px solid #4caf50;
+            padding: 1.2rem 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            display: none;
+            animation: slideDown 0.4s ease-out;
+            color: #2e7d32;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .success-alert.show {
+            display: flex;
+        }
+
+        .success-icon {
+            font-size: 1.5rem;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Progress indicator */
+        .progress-indicator {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 2rem;
+            gap: 1rem;
+        }
+
+        .progress-step {
+            flex: 1;
+            text-align: center;
+        }
+
+        .step-number {
+            width: 40px;
+            height: 40px;
+            background: #e8f5e9;
+            color: #0f3c78;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin: 0 auto 0.5rem;
+            transition: all 0.3s;
+        }
+
+        .progress-step.active .step-number {
+            background: linear-gradient(135deg, #0f3c78 0%, #072c53 100%);
+            color: white;
+            box-shadow: 0 4px 12px rgba(15, 60, 120, 0.3);
+        }
+
+        .step-label {
+            font-size: 0.85rem;
+            color: #666;
+            font-weight: 500;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .profile-wrapper {
+                grid-template-columns: 1fr;
+            }
+
+            .student-card {
+                max-width: 400px;
+                margin: 0 auto;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .profile-hero h1 {
+                font-size: 2rem;
+            }
+
+            .profile-hero p {
+                font-size: 1rem;
+            }
+
+            .form-fields {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .form-section {
+                padding: 1.5rem;
+            }
+
+            .form-actions {
+                flex-direction: column;
+            }
+
+            .btn {
+                padding: 1rem;
+            }
+        }
+
+        /* Custom Select Style */
+        select {
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230f3c78' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 1rem center;
+            background-size: 1.5em 1.5em;
+            padding-right: 2.5rem;
+            cursor: pointer;
+        }
+
+        select::-ms-expand {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="topbar">
+        <div class="container header-inner" style="display: flex; justify-content: space-between; align-items: center;">
+            <a href="index.html" class="brand" style="display: flex; align-items: center; gap: 1rem; text-decoration: none;">
+                <img src="Image2/logo.jpeg" alt="Department Logo" class="logo" style="height: 40px; width: auto;" />
+                <span style="color: #0f3c78; font-weight: 600;">Dept. of Computing & Informatics</span>
+            </a>
+            <nav class="main-nav" style="display: flex; gap: 1rem;">
+                <a href="admissions.html" style="color: #0f3c78;"><strong>Admission</strong></a>
+                <a href="course registration.html" style="color: #0f3c78;"><strong>Course Registration</strong></a>
+                <a href="student-profile.html" style="color: #0f3c78; font-weight: bold;"><strong>Student Profile</strong></a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="profile-hero">
+        <div class="hero-content">
+            <h1>📚 Student Profile</h1>
+            <p>Manage your academic information and account details</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="container">
+        <div class="profile-wrapper">
+            <!-- Sidebar - Student Card -->
+            <aside class="student-card">
+                <div class="student-card-header">
+                    <div class="student-avatar">👨‍🎓</div>
+                    <h3>Your Profile</h3>
+                    <p style="font-size: 0.9rem; opacity: 0.9; margin: 0;">Status: Active</p>
+                </div>
+                <div class="student-card-body">
+                    <div class="card-info-group">
+                        <div class="card-label">Student ID</div>
+                        <div class="card-value" id="sidebarStudentId">—</div>
+                    </div>
+                    <div class="card-info-group">
+                        <div class="card-label">Email</div>
+                        <div class="card-value" id="sidebarEmail" style="word-break: break-all; font-size: 0.9rem;">—</div>
+                    </div>
+                    <div class="card-info-group">
+                        <div class="card-label">Program</div>
+                        <div class="card-value" id="sidebarProgram">—</div>
+                    </div>
+                    <div class="card-info-group">
+                        <div class="card-label">Current Year</div>
+                        <div class="card-value" id="sidebarYear">—</div>
+                    </div>
+                    <div class="student-status">
+                        <span class="status-badge"></span>
+                        <span>Profile Updated</span>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Main Form -->
+            <section class="form-section">
+                <!-- Success Message -->
+                <div class="success-alert" id="successAlert">
+                    <span class="success-icon">✓</span>
+                    <span>Your profile has been updated successfully!</span>
+                </div>
+
+                <!-- Form Header -->
+                <div class="form-header">
+                    <h2>
+                        <span>⚙️</span>
+                        Edit Student Information
+                    </h2>
+                    <p>Update your academic details and contact information</p>
+                </div>
+
+                <!-- Form -->
+                <form id="studentForm">
+                    <!-- Progress Steps -->
+                    <div class="progress-indicator">
+                        <div class="progress-step active">
+                            <div class="step-number">1</div>
+                            <div class="step-label">Student ID</div>
+                        </div>
+                        <div class="progress-step">
+                            <div class="step-number">2</div>
+                            <div class="step-label">Email</div>
+                        </div>
+                        <div class="progress-step">
+                            <div class="step-number">3</div>
+                            <div class="step-label">Program</div>
+                        </div>
+                        <div class="progress-step">
+                            <div class="step-number">4</div>
+                            <div class="step-label">Year</div>
+                        </div>
+                    </div>
+
+                    <!-- Form Fields -->
+                    <div class="form-fields">
+                        <!-- Student ID -->
+                        <div class="form-field">
+                            <label for="studentId">
+                                Student ID
+                                <span class="required">*</span>
+                            </label>
+                            <input 
+                                type="text" 
+                                id="studentId" 
+                                name="studentId" 
+                                placeholder="BUG/CS/2023/001" 
+                                required
+                                pattern="[A-Z]{1,3}\/[A-Z]{1,3}\/\d{4}\/\d{3,4}"
+                            />
+                            <div class="field-helper">
+                                <span class="helper-icon">ℹ</span>
+                                Your official university student identification number
+                            </div>
+                        </div>
+
+                        <!-- Email -->
+                        <div class="form-field full">
+                            <label for="email">
+                                Email Address
+                                <span class="required">*</span>
+                            </label>
+                            <input 
+                                type="email" 
+                                id="email" 
+                                name="email" 
+                                placeholder="student@bugema.ac.ug" 
+                                required
+                            />
+                            <div class="field-helper">
+                                <span class="helper-icon">ℹ</span>
+                                Your official university email address
+                            </div>
+                        </div>
+
+                        <!-- Program -->
+                        <div class="form-field">
+                            <label for="program">
+                                Program
+                                <span class="required">*</span>
+                            </label>
+                            <select id="program" name="program" required>
+                                <option value="">Select your program</option>
+                                <option value="bse">Bachelor of Science in Software Engineering</option>
+                                <option value="bit">Bachelor of Science in Information Technology</option>
+                                <option value="bbc">Bachelor of Business Computing</option>
+                            </select>
+                            <div class="field-helper">
+                                <span class="helper-icon">ℹ</span>
+                                Choose the program you are enrolled in
+                            </div>
+                        </div>
+
+                        <!-- Current Year -->
+                        <div class="form-field">
+                            <label for="year">
+                                Current Year
+                                <span class="required">*</span>
+                            </label>
+                            <select id="year" name="year" required>
+                                <option value="">Select year</option>
+                                <option value="1">Year 1 (Freshman)</option>
+                                <option value="2">Year 2 (Sophomore)</option>
+                                <option value="3">Year 3 (Senior)</option>
+                            </select>
+                            <div class="field-helper">
+                                <span class="helper-icon">ℹ</span>
+                                Your current academic year
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Form Actions -->
+                    <div class="form-actions">
+                        <button type="reset" class="btn btn-cancel">
+                            ↻ Clear
+                        </button>
+                        <button type="submit" class="btn btn-save">
+                            💾 Save Changes
+                        </button>
+                    </div>
+                </form>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer style="text-align: center; padding: 2rem; color: #999; margin-top: 4rem; border-top: 1px solid #f0f0f0;">
+        <p>&copy; 2024 Department of Computing & Informatics. All rights reserved.</p>
+    </footer>
+
+    <script>
+        const studentForm = document.getElementById('studentForm');
+        const successAlert = document.getElementById('successAlert');
+        const progressSteps = document.querySelectorAll('.progress-step');
+
+        // Update sidebar as user types
+        document.getElementById('studentId').addEventListener('input', (e) => {
+            document.getElementById('sidebarStudentId').textContent = e.target.value || '—';
+            updateProgress();
+        });
+
+        document.getElementById('email').addEventListener('input', (e) => {
+            document.getElementById('sidebarEmail').textContent = e.target.value || '—';
+            updateProgress();
+        });
+
+        document.getElementById('program').addEventListener('change', (e) => {
+            const programText = e.target.options[e.target.selectedIndex].text;
+            document.getElementById('sidebarProgram').textContent = programText.includes('Software Engineering') ? 'BSE' : 
+                                                                    programText.includes('Information Technology') ? 'BIT' : 
+                                                                    programText.includes('Business') ? 'BBC' : '—';
+            updateProgress();
+        });
+
+        document.getElementById('year').addEventListener('change', (e) => {
+            document.getElementById('sidebarYear').textContent = e.target.value ? `Year ${e.target.value}` : '—';
+            updateProgress();
+        });
+
+        // Update progress indicator
+        function updateProgress() {
+            const fields = [
+                document.getElementById('studentId').value,
+                document.getElementById('email').value,
+                document.getElementById('program').value,
+                document.getElementById('year').value
+            ];
+
+            fields.forEach((field, index) => {
+                if (field) {
+                    progressSteps[index].classList.add('active');
+                } else {
+                    progressSteps[index].classList.remove('active');
+                }
+            });
+        }
+
+        // Form submission
+        studentForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            // Show success message
+            successAlert.classList.add('show');
+
+            // Animate the sidebar
+            document.querySelector('.student-card').style.animation = 'none';
+            setTimeout(() => {
+                document.querySelector('.student-card').style.animation = 'slideInLeft 0.6s ease-out';
+            }, 10);
+
+            // Hide success message after 3 seconds
+            setTimeout(() => {
+                successAlert.classList.remove('show');
+            }, 3000);
+
+            // Log form data
+            const formData = new FormData(studentForm);
+            console.log('Form submitted with data:');
+            console.log({
+                studentId: formData.get('studentId'),
+                email: formData.get('email'),
+                program: formData.get('program'),
+                year: formData.get('year')
+            });
+        });
+
+        // Prevent form submission for demo
+        studentForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            successAlert.classList.add('show');
+            setTimeout(() => {
+                successAlert.classList.remove('show');
+            }, 3000);
+        });
+    </script>
+</body>
+</html>
