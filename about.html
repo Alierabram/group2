@@ -1,0 +1,252 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>About Us — Department of Computing & Informatics</title>
+  <link rel="stylesheet" href="style.css" />  <style>
+    :root {
+      --bugema-blue: #0b63d6;
+      --bugema-dark: #094fa8;
+      --white: #ffffff;
+      --muted: #6b7280;
+      --radius: 12px;
+      --gap: 1.25rem;
+    }
+
+    .hero-card {
+      display: flex;
+      gap: 1.25rem;
+      align-items: center;
+      background: var(--white);
+      border-radius: var(--radius);
+      box-shadow: 0 8px 24px rgba(11, 99, 214, 0.08);
+      overflow: hidden;
+    }
+
+    .hero-media {
+      min-width: 320px;
+      max-width: 420px;
+      aspect-ratio: 16 / 10;
+      background: url('images/hero.jpg') center/cover no-repeat;
+    }
+
+    .hero-body {
+      padding: 1.25rem 1.5rem;
+    }
+
+    .hero h1 {
+      margin: 0 0 0.5rem 0;
+      font-size: 1.6rem;
+      color: var(--bugema-blue);
+    }
+
+    .hero p.lead {
+      margin: 0;
+      color: var(--muted);
+      font-weight: 500;
+    }
+
+    .hod {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+      background: linear-gradient(180deg, var(--bugema-blue), var(--bugema-dark));
+      color: var(--white);
+      padding: 1.25rem;
+      border-radius: var(--radius);
+      box-shadow: 0 6px 18px rgba(11, 99, 214, 0.12);
+    }
+
+    .hod .photo {
+      width: 140px;
+      min-width: 140px;
+      height: 140px;
+      border-radius: 10px;
+      border: 4px solid rgba(255, 255, 255, 0.12);
+      overflow: hidden;
+      background: transparent;
+    }
+
+    .hod .photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      border-radius: 6px;
+    }
+
+    .hod .content h2 {
+      margin: 0 0 0.35rem 0;
+      font-size: 1.15rem;
+      color: var(--white);
+    }
+
+    .hod .content p {
+      margin: 0 0 0.6rem 0;
+      color: rgba(255, 255, 255, 0.95);
+      font-size: 0.98rem;
+    }
+
+    .hod .content .signature {
+      margin-top: 0.6rem;
+      font-weight: 600;
+      color: rgba(255, 255, 255, 0.95);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+
+    .cols {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    @media (max-width: 900px) {
+      .cols { grid-template-columns: 1fr; }
+      .hod { flex-direction: column; align-items: center; text-align: center; }
+      .hod .photo { width: 120px; height: 120px; }
+    }
+  </style></head>
+<body>
+  <header class="topbar">
+    <div class="container header-inner">
+      <a href="index.html" class="brand">
+        <img src="Image2/logo.jpeg" alt="Department Logo" class="logo" />
+        <span>Department of Computing &amp; Informatics</span>
+      </a>
+      <button class="nav-toggle" id="navToggle" aria-label="Open menu">☰</button>
+      <nav class="main-nav" id="mainNav" aria-label="Primary navigation">
+        <a href="index.html">Home</a>
+        <a href="about.html" class="active">About</a>
+        <a href="academics.html">Academics</a>
+        <a href="admissions.html">Admission</a>
+        <a href="events.html">News &amp; Events</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- Hero -->
+    <section class="hero" aria-labelledby="hero-heading">
+      <div class="hero-card" role="banner">
+        <div class="hero-media" aria-hidden="true"></div>
+        <div class="hero-body">
+          <h1 id="hero-heading">About the Department of Computing &amp; Informatics</h1>
+          <p class="lead">We prepare innovators, developers, and researchers with strong technical skills and ethical foundations — ready to transform industries and communities through computing.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Main content -->
+    <section class="main-content" role="main">
+      <!-- HOD Message (blue background, white text) -->
+      <section class="hod" aria-labelledby="hod-title">
+        <div class="photo" role="img" aria-label="Head of Department photo">
+          <img src="Image2/Hod.jpeg" alt="Head of Department photo" />
+        </div>
+        <div class="content">
+          <h2 id="hod-title">Message from the Head of Department</h2>
+          <p>Welcome to the Department of Computing &amp; Informatics at Bugema University. Our department is committed to delivering high-quality education, practical experience and research that address real-world challenges. We emphasize strong theoretical foundations, hands-on lab work, ethical practice and community engagement.</p>
+          <p>Our graduates are prepared to excel in industry, academia and public service. We invite you to explore our programs and join us in shaping the future through computing.</p>
+          <div class="signature">Mr. Ssewankambo Erma</div>
+        </div>
+      </section>
+
+      <!-- About cards (white background, blue text headings) -->
+      <section class="grid" aria-label="About details">
+        <article class="card" aria-labelledby="mission-title">
+          <h3 id="mission-title">Our Mission</h3>
+          <p>To provide high-quality, practice-oriented computing education and research that empowers students to solve societal problems and drive technological innovation.</p>
+          <ul>
+            <li>Deliver up-to-date curricula aligned with industry needs</li>
+            <li>Promote research and innovation</li>
+            <li>Support ethical and community-centered computing</li>
+          </ul>
+        </article>
+        <article class="card" aria-labelledby="vision-title">
+          <h3 id="vision-title">Our Vision</h3>
+          <p>To be a leading centre of excellence in computing education and research in the region, producing transformative leaders in technology and information sciences.</p>
+        </article>
+        <article class="card" aria-labelledby="programs-title">
+          <h3 id="programs-title">Programs Offered</h3>
+          <p>We offer undergraduate and postgraduate programs designed to equip students with strong theoretical knowledge and practical skills.</p>
+          <div class="cols">
+            <div>
+              <strong>Undergraduate</strong>
+              <ul>
+                <li>Bachelor of Library and Information Science</li>
+                <li>Bachelor of Science in Information Technology</li>
+                <li>Bachelor of Science in Business Computing</li>
+                <li>Bachelor of Science in Network Systems Administration</li>
+                <li>Bachelor of Science in Software Engineering</li>
+                <li>Bachelor of Science in Applied Data Science and AI</li>
+                <li>Bachelor of Records and Archives</li>
+                <li>Diploma in Computer Forensics</li>
+                <li>Certificate in Information Technology</li>
+              </ul>
+            </div>
+            <div>
+              <strong>Postgraduate &amp; Short Courses</strong>
+              <ul>
+                <li>CICO & ICDL</li>
+                <li>Professional short courses: Network Administration, Web Development, Mobile Apps</li>
+              </ul>
+            </div>
+          </div>
+        </article>
+        <article class="card" aria-labelledby="faculty-title">
+          <h3 id="faculty-title">Faculty &amp; Research</h3>
+          <p>Our faculty are engaged in teaching, research and consultancy across areas such as networks, software engineering, AI, HCI and cybersecurity.</p>
+          <ul>
+            <li>Mr. Walusimbi Albert – Network Systems Administration</li>
+            <li>Mr. Luwalo Enok – AI &amp; Data Science</li>
+            <li>Mr. Ssenkambo Erma – Software Engineering</li>
+          </ul>
+        </article>
+        <article class="card" aria-labelledby="history-title">
+          <h3 id="history-title">History &amp; Achievements</h3>
+          <p>Since establishment, the department has grown in intake, research output, and industry partnerships. We maintain strong links with industry partners for internships and collaborative projects.</p>
+        </article>
+        <article class="card" aria-labelledby="contact-title">
+          <h3 id="contact-title">Contact &amp; Visit</h3>
+          <p>Department of Computing &amp; Informatics – Bugema University</p>
+          <ul>
+            <li>Email: computing@bugema.ac.ug</li>
+            <li>Phone: +256 702940003</li>
+            <li>Location: Main campus, Luweero, Uganda</li>
+          </ul>
+        </article>
+      </section>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div>
+        <h3>Department of Computing &amp; Informatics</h3>
+        <p>Innovate • Educate • Collaborate.</p>
+        <p>Room 101, Computing Block, 123 University Ave</p>
+        <p><a href="tel:+1234567890" style="color:#e9f6ff;">+1 (234) 567-890</a> · <a href="mailto:info@computing.example.edu" style="color:#e9f6ff;">info@computing.example.edu</a></p>
+      </div>
+      <div>
+        <h4>Quick Links</h4>
+        <a href="admissions.html">Admissions</a><br>
+        <a href="academics.html">Programs</a><br>
+        <a href="events.html">Events</a><br>
+        <a href="Students Services.html">Student Services</a><br>
+        <a href="contact.html">Contact</a>
+      </div>
+      <div>
+        <h4>Stay Connected</h4>
+        <p>Subscribe for updates on admissions, events, and research.</p>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
