@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Student Services — Department of Computing & Informatics</title>
+  <meta name="description" content="Student support services, alumni message, careers, counselling and IT support — Department of Computing & Informatics." />  <link rel="stylesheet" href="style.css">  <style>
+    :root{
+      --blue:#0b63d6;
+      --blue-dark:#094fa8;
+      --white:#ffffff;
+      --muted:#5b6470;
+      --radius:12px;
+      --container:1100px;
+      --shadow: 0 8px 24px rgba(11,99,214,0.08);
+      --input-border: rgba(11,99,214,0.12);
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background:linear-gradient(180deg,#fbfdff,#ffffff);
+      color:#052033;
+      -webkit-font-smoothing:antialiased;
+    }
+    .container{max-width:var(--container); margin:0 auto; padding:1.25rem;}
+    header{display:flex; align-items:center; gap:1rem; padding:0.5rem 0}
+    .brand{display:flex; align-items:center; gap:0.8rem; color:var(--blue); font-weight:700; text-decoration:none}
+    .brand img{width:46px; height:auto; border-radius:50%; background-color: white}
+    nav{margin-left:auto; display:flex; gap:0.6rem}
+    nav a{padding:0.45rem 0.7rem; border-radius:8px; font-weight:600; color:var(--blue)}
+    nav a:hover{background:rgba(11,99,214,0.06)}
+
+    .hero{display:flex; gap:1rem; align-items:center; background:var(--white); padding:1rem; border-radius:var(--radius); box-shadow:var(--shadow); margin-top:0.6rem}
+    .hero h1{margin:0; color:var(--blue)}
+    .hero p{margin:0.35rem 0 0 0; color:var(--muted)}
+
+    .grid{display:grid; grid-template-columns:1fr; gap:1rem; margin-top:1rem}
+    @media(min-width:980px){ .grid{grid-template-columns: 2fr 1fr} }
+
+    .card{background:var(--white); border-radius:12px; padding:1rem; box-shadow:var(--shadow); border:1px solid rgba(11,99,214,0.04)}
+    h2{margin:0 0 0.6rem 0; color:var(--blue)}
+
+    /* Alumni message */
+    .alumni{
+      display:flex; gap:1rem; align-items:flex-start; flex-direction:column;
+    }
+    @media(min-width:880px){ .alumni{flex-direction:row} }
+    .alumni .photo{flex:0 0 220px; border-radius:10px; overflow:hidden; background:#f3f8ff; display:flex; align-items:center; justify-content:center}
+    .alumni .photo img{width:100%; height:auto; display:block}
+    .alumni .message{flex:1}
+    .alumni blockquote{margin:0; font-style:italic; color:#163d5b; padding:0.6rem 0; border-left:4px solid var(--blue); background:linear-gradient(180deg,#fff,#fbfdff); border-radius:6px}
+
+    /* Services list */
+    .services{display:grid; grid-template-columns:1fr; gap:0.7rem}
+    @media(min-width:640px){ .services{grid-template-columns:repeat(2,1fr)} }
+    .service{display:flex; gap:0.8rem; align-items:flex-start; padding:0.6rem; border-radius:10px; border:1px solid rgba(11,99,214,0.04)}
+    .service .icon{width:48px; height:48px; border-radius:10px; background:var(--blue); color:var(--white); display:flex; align-items:center; justify-content:center; font-weight:700}
+
+    /* Quick links */
+    .links{display:flex; flex-direction:column; gap:0.5rem}
+    .link{display:flex; justify-content:space-between; align-items:center; padding:0.6rem; border-radius:8px; border:1px solid rgba(11,99,214,0.04)}
+    .link a{color:var(--blue); font-weight:600; text-decoration:none}
+
+    /* Events */
+    .events{display:flex; flex-direction:column; gap:0.7rem}
+    .event{display:flex; gap:0.8rem; align-items:flex-start; padding:0.6rem; border-radius:8px; border:1px solid rgba(11,99,214,0.04)}
+    .event .date{min-width:72px; background:linear-gradient(180deg,var(--blue),var(--blue-dark)); color:var(--white); padding:0.5rem; border-radius:8px; text-align:center; font-weight:700}
+    .event .date, .event .date *{color:var(--white) !important;}
+    .form-actions button{color:var(--white) !important;}
+
+    /* Feedback / request form */
+    form{display:block}
+    label{display:block; font-weight:700; color:var(--blue); margin-bottom:0.3rem}
+    input[type="text"], input[type="email"], textarea, select{
+      width:100%; padding:0.6rem 0.8rem; border-radius:8px; border:1px solid var(--input-border); background:#fff; font-size:0.95rem;
+    }
+    textarea{min-height:110px; resize:vertical}
+    .form-actions{display:flex; gap:0.6rem; margin-top:0.6rem}
+
+    /* Contact card */
+    .contact p{margin:0 0 0.45rem 0; color:var(--muted)}
+
+    footer{margin-top:1rem; padding-bottom:1rem; color:var(--muted); text-align:center}
+
+    @media(max-width:640px){
+      nav{display:none}
+      .alumni .photo{width:100%}
+      .hero{flex-direction:column; align-items:flex-start}
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <a class="brand" href="index.html">
+        <img src="Image2/logo.jpeg" alt="Dept logo">
+        <span>Department of Computing &amp; Informatics</span>
+        <link rel="stylesheet" href="style.css" />
+      </a>
+      <nav aria-label="Main navigation">
+       <a href="index.html">Home</a>
+        <a href="contact.html">Contact</a>
+
+      </nav>
+    </header>
+
+    <section class="hero" aria-labelledby="services-heading">
+      <div>
+        <h1 id="services-heading">Student Services</h1>
+        <p>Support, resources and guidance to help computing students succeed — academic advising, careers, counselling and technical support.</p>
+      </div>
+    </section>
+
+    <div class="grid" role="main">
+      <!-- Main column -->
+      <div>
+        <!-- Alumni message -->
+        <section class="card" aria-labelledby="alumni-title">
+          <h2 id="alumni-title">Alumni Message</h2>
+          <div class="alumni">
+            <div class="photo" aria-hidden="true">
+              <!-- Replace with real alumni image -->
+              <img src="Image2/Alumni.jpeg" alt="Alumni portrait">
+            </div>
+            <div class="message">
+              <h3 style="margin:0 0 0.5rem 0; color:var(--blue)">From our Alumni — Dhieu Majhok, Class of 2025</h3>
+              <blockquote>
+                "My time in the Department of Computing &amp; Informatics gave me the technical foundation and problem-solving mindset to launch my career in software engineering.
+                The mentorship, practical projects and connections to industry were invaluable. I encourage current students to take advantage of internships, participate in clubs and never stop learning."
+              </blockquote>
+
+              <p style="margin-top:0.6rem; color:var(--muted)"><strong>Where Dhieu is now:</strong> Senior Software Engineer, GlobalTech Solutions. <a href="alumni.html">Read more alumni stories →</a></p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Services offered -->
+        <section class="card" aria-labelledby="services-offered">
+          <h2 id="services-offered">Student Support Services</h2>
+          <div class="services">
+            <div class="service">
+              <div class="icon">A</div>
+              <div>
+                <strong>Academic Advising</strong>
+                <div class="small" style="color:var(--muted)">Programme planning, course choices, progression checks and appeals.</div>
+                <div style="margin-top:0.45rem"><a href="advising.html" style="color:var(--blue); font-weight:600">Book an advising session →</a></div>
+              </div>
+            </div>
+
+            <div class="service">
+              <div class="icon">C</div>
+              <div>
+                <strong>Careers & Internships</strong>
+                <div class="small" style="color:var(--muted)">CV reviews, interview prep, internship placement and employer engagement.</div>
+                <div style="margin-top:0.45rem"><a href="careers.html" style="color:var(--blue); font-weight:600">See opportunities →</a></div>
+              </div>
+            </div>
+
+            <div class="service">
+              <div class="icon">S</div>
+              <div>
+                <strong>Student Counselling</strong>
+                <div class="small" style="color:var(--muted)">Confidential counselling services for academic or personal concerns.</div>
+                <div style="margin-top:0.45rem"><a href="counselling.html" style="color:var(--blue); font-weight:600">Request counselling →</a></div>
+              </div>
+            </div>
+
+            <div class="service">
+              <div class="icon">IT</div>
+              <div>
+                <strong>IT & Lab Support</strong>
+                <div class="small" style="color:var(--muted)">Computer labs, software access, Wi-Fi, and helpdesk for technical issues.</div>
+                <div style="margin-top:0.45rem"><a href="it-support.html" style="color:var(--blue); font-weight:600">Report an issue →</a></div>
+              </div>
+            </div>
+
+            <div class="service">
+              <div class="icon">D</div>
+              <div>
+                <strong>Disability & Accessibility</strong>
+                <div class="small" style="color:var(--muted)">Adjustments, accessible materials and support for students with disabilities.</div>
+                <div style="margin-top:0.45rem"><a href="disability.html" style="color:var(--blue); font-weight:600">Learn more →</a></div>
+              </div>
+            </div>
+
+            <div class="service">
+              <div class="icon">H</div>
+              <div>
+                <strong>Health & Wellbeing</strong>
+                <div class="small" style="color:var(--muted)">Health advice, referrals and wellbeing workshops.</div>
+                <div style="margin-top:0.45rem"><a href="wellbeing.html" style="color:var(--blue); font-weight:600">Wellbeing resources →</a></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Events & workshops -->
+        <section class="card" aria-labelledby="events-title" style="margin-top:1rem">
+          <h2 id="events-title">Upcoming Events & Workshops</h2>
+          <div class="events">
+            <div class="event">
+              <div class="date">24 Apr</div>
+              <div>
+                <strong>CV & Interview Workshop</strong>
+                <div class="small" style="color:var(--muted)">10:00 — 12:00, Room C103. Learn to craft an effective CV and practice interview techniques.</div>
+                <div style="margin-top:0.3rem"><a href="events/cv-workshop.html" style="color:var(--blue); font-weight:600">Register →</a></div>
+              </div>
+            </div>
+
+            <div class="event">
+              <div class="date">02 May</div>
+              <div>
+                <strong>Cloud Technologies Seminar</strong>
+                <div class="small" style="color:var(--muted)">14:00 — 16:00, Auditorium. Intro to AWS & Azure — industry speaker.</div>
+                <div style="margin-top:0.3rem"><a href="events/cloud-seminar.html" style="color:var(--blue); font-weight:600">More details →</a></div>
+              </div>
+            </div>
+
+            <div class="event">
+              <div class="date">10 May</div>
+              <div>
+                <strong>Peer Programming Night</strong>
+                <div class="small" style="color:var(--muted)">18:00 — 21:00, Labs. Collaborative coding and project help.</div>
+                <div style="margin-top:0.3rem"><a href="events/peer-code.html" style="color:var(--blue); font-weight:600">Join →</a></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Feedback / Service Request -->
+        <section class="card" aria-labelledby="request-title" style="margin-top:1rem">
+          <h2 id="request-title">Feedback & Service Request</h2>
+          <p class="small" style="margin:0 0 0.6rem 0">Use this form to request services (advising, counselling, IT support) or give feedback about department services.</p>
+
+          <form action="/service-request" method="post" novalidate>
+            <label for="sr-name">Full name</label>
+            <input id="sr-name" name="name" type="text" placeholder="e.g. John Student">
+
+            <label for="sr-email" style="margin-top:0.6rem">Email</label>
+            <input id="sr-email" name="email" type="email" placeholder="you@example.com">
+
+            <label for="sr-type" style="margin-top:0.6rem">Request type</label>
+            <select id="sr-type" name="type">
+              <option value="">Select</option>
+              <option value="advising">Academic Advising</option>
+              <option value="careers">Careers</option>
+              <option value="counselling">Counselling</option>
+              <option value="it">IT Support</option>
+              <option value="other">Other</option>
+            </select>
+
+            <label for="sr-message" style="margin-top:0.6rem">Message / details</label>
+            <textarea id="sr-message" name="message" placeholder="Describe your request or feedback"></textarea>
+
+            <div class="form-actions">
+              <button type="submit" style="background:var(--blue); color:#fff; border:none; padding:0.6rem 0.9rem; border-radius:8px; font-weight:700">Submit Request</button>
+              <a href="faqs.html" style="display:inline-block; padding:0.6rem 0.9rem; border-radius:8px; border:2px solid rgba(11,99,214,0.12); color:var(--blue); text-decoration:none; font-weight:700">View FAQs</a>
+            </div>
+          </form>
+        </section>
+      </div>
+
+      <!-- Sidebar -->
+      <aside>
+        <div class="card contact">
+          <h2>Contact & Office Hours</h2>
+          <p><strong>Student Services Office</strong></p>
+          <p class="small">Room: D201, Department Building</p>
+          <p class="small">Email: studentservices@computing.example.edu</p>
+          <p class="small">Phone: +256 123 456 789</p>
+          <p style="margin-top:0.6rem" class="small"><strong>Office hours:</strong><br>Mon — Fri: 09:00 — 16:00</p>
+          <div style="margin-top:0.6rem">
+            <a href="contact.html" style="display:inline-block; padding:0.6rem 0.9rem; border-radius:8px; background:var(--blue); color:#fff; text-decoration:none; font-weight:700">Contact us</a>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2>Quick Links</h2>
+          <div class="links">
+            <div class="link"><span>Forms & Downloads</span><a href="downloads/forms.zip">Open →</a></div>
+            <div class="link"><span>Academic Calendar</span><a href="calendar.html">View →</a></div>
+            <div class="link"><span>Lab Timetables</span><a href="timetables.html">View →</a></div>
+            <div class="link"><span>Policies & Procedures</span><a href="policies.html">Read →</a></div>
+            <div class="link"><span>Scholarships & Funding</span><a href="scholarships.html">Apply →</a></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2>Student Organizations</h2>
+          <p class="small">Connect with clubs and societies: Programming Club, Cybersecurity Group, Women in Tech, Robotics Team.</p>
+          <div style="margin-top:0.6rem">
+            <a href="clubs.html" style="display:inline-block; padding:0.6rem 0.9rem; border-radius:8px; border:2px solid rgba(11,99,214,0.12); color:var(--blue); text-decoration:none; font-weight:700">Explore clubs</a>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2>Emergency & Support</h2>
+          <p class="small"><strong>Security:</strong> +256 700 000 000</p>
+          <p class="small"><strong>Crisis line:</strong> +256 700 000 111</p>
+          <p class="small">For immediate help contact campus security or call emergency services.</p>
+        </div>
+      </aside>
+    </div>
+
+    <footer>
+      © Department of Computing &amp; Informatics • For support email studentservices@computing.example.edu
+    </footer>
+  </div>
+</body>
+</html>
