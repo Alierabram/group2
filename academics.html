@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Academics — Department of Computing &amp; Informatics</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet" />
+  <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+  <style>
+    :root {
+      --blue: #0b63d6;
+      --blue-dark: #094fa8;
+      --white: #ffffff;
+      --muted: #4f5766;
+      --background: #f2f7ff;
+      --container: 1140px;
+      --radius: 12px;
+      --shadow: 0 8px 24px rgba(11, 99, 214, 0.11);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial,
+        sans-serif;
+      color: #0f1f38;
+      background: var(--background);
+      line-height: 1.55;
+    }
+
+    a { color: var(--blue); text-decoration: none; }
+
+    .container {
+      max-width: var(--container);
+      margin: 0 auto;
+      padding: 1.5rem 1.5rem 2rem;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      padding: 0.8rem 0;
+      border-bottom: 1px solid rgba(15, 31, 56, 0.12);
+    }
+
+    .brand { display: flex; align-items: center; gap: 0.7rem; font-weight: 700; color: var(--blue); }
+    .brand img {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid rgba(11, 99, 214, 0.16);
+      background: #fff;
+    }
+
+    nav {
+      margin-left: auto;
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    nav a {
+      padding: 0.42rem 0.72rem;
+      border-radius: 8px;
+      font-weight: 600;
+      transition: background 0.2s ease;
+    }
+
+    nav a:hover,
+    nav a.active { background: rgba(11, 99, 214, 0.12); }
+
+    .hero {
+      margin-top: 1.5rem;
+      background: var(--white);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      display: flex;
+      gap: 1.5rem;
+      padding: 1.5rem;
+      align-items: center;
+    }
+
+    .hero .text h1 {
+      margin: 0;
+      color: var(--blue-dark);
+      font-size: clamp(1.8rem, 3vw, 2.4rem);
+      font-weight: 800;
+      letter-spacing: 0.02em;
+      line-height: 1.2;
+      padding: 0.6rem 0.8rem;
+      background: linear-gradient(90deg, rgba(11,99,214,0.12), rgba(11,99,214,0));
+      border-left: 4px solid var(--blue);
+      border-radius: 8px;
+      margin-bottom: 0.6rem;
+      max-width: 700px;
+    }
+
+    .hero .text p { margin: 0.5rem 0 0 0; color: var(--muted); max-width: 650px; }
+
+    .hero .image {
+      flex-shrink: 0;
+      width: 200px;
+      height: 150px;
+      background: url("Images/academics-hero.jpg") center/cover no-repeat;
+      border-radius: 10px;
+      border: 1px solid rgba(11, 99, 214, 0.15);
+      box-shadow: 0 3px 14px rgba(0, 0, 0, 0.08);
+    }
+
+    .grid {
+      margin-top: 1.5rem;
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 1.5rem;
+    }
+
+    .card {
+      background: var(--white);
+      border-radius: var(--radius);
+      border: 1px solid rgba(11, 99, 214, 0.09);
+      box-shadow: var(--shadow);
+      padding: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .section-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 0.5rem;
+    }
+
+    .section-title h2 { margin: 0; font-size: 1.1rem; color: var(--blue-dark); }
+    .section-title .small { color: var(--muted); font-size: 0.9rem; }
+
+    .courses { margin-top: 0.8rem; display: grid; gap: 1rem; }
+
+    .course {
+      padding: 0.7rem;
+      border: 1px solid rgba(11, 99, 214, 0.11);
+      border-radius: 10px;
+      background: linear-gradient(180deg, #fff 0%, #f6faff 100%);
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 0.7rem;
+      align-items: start;
+    }
+
+    .course .icon {
+      width: 54px;
+      height: 54px;
+      background: var(--blue);
+      color: #fff;
+      border-radius: 10px;
+      display: grid;
+      place-items: center;
+      font-weight: 700;
+    }
+
+    .course h3 { margin: 0; font-size: 1rem; color: var(--blue-dark); }
+    .course p { margin: 0.2rem 0 0; color: var(--muted); font-size: 0.95rem; }
+
+    .small-cards {
+      margin-top: 0.8rem;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(180px, 1fr));
+      gap: 1rem;
+    }
+
+    .small-cards .block {
+      border: 1px solid rgba(11, 99, 214, 0.12);
+      background: linear-gradient(180deg, #fff 0%, #f7faff 100%);
+      border-radius: 10px;
+      padding: 0.75rem;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .programs { margin-top: 0.8rem; display: grid; gap: 1rem; }
+    .program {
+      padding: 0.85rem;
+      border: 1px solid rgba(11, 99, 214, 0.1);
+      border-radius: 10px;
+      background: #fff;
+    }
+
+    .photo-row {
+      display: flex;
+      gap: 0.55rem;
+      margin-top: 0.75rem;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .photo-row img {
+      width: calc(33.333% - 0.35rem);
+      min-width: 100px;
+      height: 90px;
+      border-radius: 10px;
+      object-fit: cover;
+      border: 1px solid rgba(11, 99, 214, 0.2);
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .cta-row {
+      margin-top: 0.8rem;
+      display: flex;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.55rem 0.85rem;
+      border-radius: 8px;
+      font-weight: 700;
+      color: #fff;
+      background: var(--blue);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 7px 16px rgba(11, 99, 214, 0.25);
+    }
+
+    .btn.outline {
+      background: #fff;
+      color: var(--blue);
+      border: 2px solid rgba(11, 99, 214, 0.2);
+    }
+
+    .btn.outline:hover { background: rgba(11, 99, 214, 0.08); }
+
+    .about-list { margin-top: 0.85rem; color: var(--muted); font-size: 0.92rem; }
+    .about-list ul { margin: 0.35rem 0 0 1rem; }
+    .about-list li { margin: 0.25rem 0; }
+
+    footer {
+      margin-top: 2rem;
+      background: linear-gradient(90deg, rgba(11,99,214,0.08), rgba(11,99,214,0));
+      border-top: 1px solid rgba(11,99,214,0.2);
+      padding: 1.2rem 1rem;
+      color: #30445b;
+      font-size: 0.95rem;
+      text-align: center;
+      display: grid;
+      gap: 0.4rem;
+      justify-items: center;
+    }
+
+    footer .footer-links {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      font-size: 0.88rem;
+      color: #4a5f77;
+    }
+
+    footer .footer-links a {
+      color: #094fa8;
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      padding-bottom: 1px;
+      transition: border-bottom-color 0.2s ease;
+    }
+
+    footer .footer-links a:hover {
+      border-bottom-color: #094fa8;
+    }
+
+    footer .contact {
+      font-size: 0.9rem;
+      color: #4f6379;
+    }
+
+    footer .contact a {
+      color: inherit;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    @media (max-width: 960px) {
+      .grid { grid-template-columns: 1fr; }
+      .hero { grid-template-columns: 1fr; }
+      .small-cards { grid-template-columns: 1fr; }
+      .photo-row img { width: calc(50% - 0.35rem); }
+    }
+
+    @media (max-width: 640px) {
+      nav { display: none; }
+      .photo-row img { width: 100%; }
+      header,
+      .hero,
+      .grid,
+      .card { padding: 1rem; }
+      .hero { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <a class="brand" href="index.html">
+        <img src="Image2/logo.jpeg" alt="Dept Logo" />
+        <span>Dept. of Computing &amp; Informatics</span>
+         <link rel="stylesheet" href="style.css" />
+      </a>
+      <nav aria-label="Main navigation">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a class="active" href="academics.html">Academics</a>
+        <a href="admissions.html">Admissions</a>
+        <a href="events.html">News &amp; Events</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </header>
+
+    <section class="hero" aria-labelledby="academics-heading">
+      <div class="text">
+        <h1 id="academics-heading">Academics &amp; Programs</h1>
+        <p>Comprehensive academic pathways, professional certifications, practical labs and student-led
+          experiences designed to accelerate your technology career.</p>
+      </div>
+
+    <div class="grid" role="main">
+      <div>
+        <article class="card" aria-labelledby="courses-title">
+          <div class="section-title">
+            <h2 id="courses-title">Department Courses</h2>
+            <div class="small">Undergraduate &amp; Postgraduate</div>
+          </div>
+
+          <div class="courses" aria-live="polite">
+            <div class="course">
+              <div class="icon">BSE</div>
+              <div>
+                <h3>Bachelor of Science in Software Engineering</h3>
+                <p>Android programming, UI/UX, web platforms, Linux, Windows Server, algorithms, databases, AI,
+                  software engineering and network design.</p>
+              </div>
+            </div>
+
+            <div class="course">
+              <div class="icon">BIT</div>
+              <div>
+                <h3>Bachelor of Science in Information Technology</h3>
+                <p>System administration, cloud, web/mobile development, cybersecurity, IT project management and
+                  infrastructure.</p>
+              </div>
+            </div>
+
+            <div class="course">
+              <div class="icon">BBC</div>
+              <div>
+                <h3>Bachelor of Business Computing</h3>
+                <p>Business systems, data analytics, ERP, distributed systems and industry-capstone projects.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="about-list">
+            <strong>More details available:</strong>
+            <ul>
+              <li>Course curriculum &amp; semester syllabi.</li>
+              <li>Admission requirements &amp; academic policy.</li>
+              <li>Faculty, labs, research, partnerships and internship info.</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="card" aria-labelledby="programs-title">
+          <div class="section-title">
+            <h2 id="programs-title">Professional Programs</h2>
+            <div class="small">Skills certification</div>
+          </div>
+
+          <div class="programs">
+            <div class="program" id="cico">
+              <h4>CICO Course Program</h4>
+              <p>Cisco-style networking training: routing, switching, VLAN, wireless, security, packet tracer labs.</p>
+               <div class="photo-row">
+                <img src="Image2/cico.jpeg" alt="CICO training session" />
+                <img src="Image2/cico1.jpeg" alt="CICO certificate" />
+                
+              </div>
+              <ul>
+                <li>8–12 weeks</li>
+                <li>Hands-on labs and projects</li>
+                <li>Certificate on completion</li>
+              </ul>
+            </div>
+             <div class="cta-row"></div>
+                <a class="btn" href="https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://www.cisco.com/site/us/en/learn/training-certifications/training/netacad/index.html&ved=2ahUKEwjQx-e1hLiTAxWxU6QEHeRZBNcQFnoECBEQAQ&usg=AOvVaw0LGW-aJzJy2HabFcqQeJ6y">Click here to join</a>
+
+            <div class="program" id="icdl">
+              <h4>ICDL Course Program</h4>
+              <p>Digital literacy: Word, Excel, PowerPoint, Database, Collaboration and Computer Essentials.</p>
+
+              <div class="photo-row">
+                <img src="Image2/ICDL ST.jpeg" alt="ICDL training session" />
+                <img src="Image2/ICDL2.jpeg" alt="ICDL certificate" />
+                <img src="Image2/ICDL.jpeg" alt="ICDL class" />
+              </div>
+               <div class="cta-row"></div>
+                <a class="btn" href="https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://icdl.org/&ved=2ahUKEwi59euqgriTAxX_gf0HHUZnAsYQFnoECB0QAQ&sqi=2&usg=AOvVaw1vnCQJkPYi36uD9bMfzSu7">Click here to join</a>
+            
+              <ul>
+                <li>4–6 weeks per module</li>
+                <li>Internationally recognized</li>
+                <li>For students, staff, professionals</li>
+              </ul>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <aside class="sidebar">
+        <div class="card">
+          <h3 style="color:var(--blue); margin:0 0 0.5rem 0">Academic Calendar</h3>
+          <div class="small">
+            <strong>Semester 1</strong><br />Start 8 August • Midterm 21 October • End 10 December<br>
+            <strong>Semester 2</strong><br />Start 7 January • Midterm 10 March • End 12 May<br>
+            <strong>Short Courses</strong><br />ICDL &amp; CICO intake rolling (contact for schedule)
+          </div>
+          <div class="photo-row">
+                <img src="Image2/Calader.jpeg" alt="Academic Calendar" />
+              </div>
+          <div style="margin-top:0.6rem">
+            <a class="btn" href="https://bugemauniv.ac.ug/academic-calendars/">View Calendar</a>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3 style="color:var(--blue); margin:0 0 0.5rem 0">IT Club &amp; Activities</h3>
+          <p style="margin:0 0 0.5rem 0; color:var(--muted)">Hackathons, workshops, demo contests for practical experience.</p>
+          <div class="portal-features">
+            <div class="feature"><div class="icon">1</div><div><strong>Weekly Labs</strong><div class="small">Hands-on sessions.</div></div></div>
+            <div class="feature"><div class="icon">2</div><div><strong>Demo Days</strong><div class="small">Showcase projects.</div></div></div>
+            <div class="feature"><div class="icon">3</div><div><strong>Mentorship</strong><div class="small">Industry experts.</div></div></div>
+          </div>
+          <div style="margin-top:0.6rem">
+            <a class="btn" href="https://chat.whatsapp.com/C6RaGsxfeQY8CVeAfrnta7?mode=gi_t">Join the Club</a>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3 style="color:var(--blue); margin:0 0 0.5rem 0">Contact Academics</h3>
+          <div class="small">
+            Email: computing@bugema.ac.ug<br>
+            Phone: +256 123 456 789<br>
+            Office: Room 101, Computing Block
+          </div>
+        </div>
+        </aside>
+      </div>
+
+    <footer>
+      <div class="contact">© Bugema University — Department of Computing &amp; Informatics</div>
+      <div class="footer-links">
+        <a href="about.html">About</a>
+        <a href="admissions.html">Admissions</a>
+        <a href="contact.html">Contact</a>
+        <a href="timtable.html">Timetable</a>
+      </div>
+      <div class="contact">Academic enquiries: <a href="mailto:computing@bugema.ac.ug">computing@bugema.ac.ug</a></div>
+    </footer>
+  </div>
+</body>
+</html>
