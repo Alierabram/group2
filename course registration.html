@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Course Registration - Department of Computing and Informatics</title>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+        /* Additional styles specific to course registration page */
+        .registration-hero {
+            background: linear-gradient(135deg, #0f3c78 0%, #072c53 100%);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+        }
+
+        .registration-hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .registration-hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .registration-steps {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .step {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            text-align: center;
+            min-width: 200px;
+        }
+
+        .step-number {
+            width: 50px;
+            height: 50px;
+            background: var(--blue);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin: 0 auto 1rem;
+        }
+
+        .step h3 {
+            color: var(--blue);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Form enhancements */
+        .application-form .form-header{display:flex; gap:1rem; align-items:flex-start; margin-bottom:1.5rem}
+        .form-icon{font-size:2rem; line-height:1}
+        .form-section{border:1px solid rgba(11,99,214,0.08); border-radius:12px; padding:1.5rem; margin-bottom:1.5rem; background:linear-gradient(180deg,#ffffff,#fafdff)}
+        .section-title{font-weight:700; color:var(--blue); margin-bottom:1rem; font-size:1.1rem; display:flex; align-items:center; gap:0.5rem}
+        .field-help{font-size:0.85rem; color:var(--muted); margin-top:0.4rem; line-height:1.4}
+        .character-count{font-size:0.8rem; color:var(--muted); text-align:right; margin-top:0.3rem}
+        .full-width{width:100%}
+
+        /* Enhanced file upload */
+        .file-upload-area{border:2px dashed rgba(11,99,214,0.2); border-radius:10px; padding:2rem; text-align:center; transition:border-color 0.3s; cursor:pointer; background:linear-gradient(180deg,#ffffff,#f8fbff)}
+        .file-upload-area:hover{border-color:var(--blue); background:linear-gradient(180deg,#e8f2ff,#ffffff)}
+        .upload-icon{font-size:3rem; margin-bottom:1rem; display:block}
+        .upload-text{margin-bottom:0.5rem}
+        .upload-link{color:var(--blue); text-decoration:underline; cursor:pointer}
+        .upload-hint{font-size:0.9rem; color:var(--muted); margin-top:0.5rem}
+        .uploaded-files{margin-top:1rem}
+
+        /* Enhanced checkboxes */
+        .checkbox-label{display:flex; align-items:flex-start; gap:0.8rem; margin-bottom:0.8rem; cursor:pointer; padding:0.5rem; border-radius:8px; transition:background 0.2s}
+        .checkbox-label:hover{background:rgba(11,99,214,0.03)}
+        .checkbox-label input{margin:0; width:auto}
+        .checkmark{width:20px; height:20px; border:2px solid rgba(11,99,214,0.3); border-radius:4px; position:relative; display:inline-block; margin-top:2px; transition:all 0.2s}
+        .checkbox-label input:checked + .checkmark{background:var(--blue); border-color:var(--blue)}
+        .checkbox-label input:checked + .checkmark::after{content:'✓'; position:absolute; top:-2px; left:2px; color:white; font-weight:bold; font-size:14px}
+
+        /* Enhanced buttons */
+        .primary-btn{background:linear-gradient(135deg,var(--blue),var(--blue-dark)); color:white; border:none; box-shadow:0 4px 12px rgba(11,99,214,0.3); transition:all 0.3s}
+        .primary-btn:hover{transform:translateY(-2px); box-shadow:0 6px 16px rgba(11,99,214,0.4)}
+        .btn-icon{margin-right:0.5rem}
+
+        /* Progress indicator */
+        .form-progress{margin-top:1.5rem; text-align:center}
+        .progress-bar{width:100%; height:8px; background:rgba(11,99,214,0.1); border-radius:4px; overflow:hidden; margin-bottom:0.5rem}
+        .progress-fill{height:100%; background:linear-gradient(90deg,var(--blue),var(--blue-dark)); border-radius:4px; transition:width 0.3s ease}
+        .progress-text{color:var(--blue); font-weight:500}
+
+        /* Registration form enhancements */
+        .registration-form .form-header{display:flex; gap:1rem; align-items:flex-start; margin-bottom:1.5rem}
+        .course-selection-notice, .registration-notice{display:flex; gap:1rem; align-items:flex-start; padding:1rem; background:linear-gradient(135deg,#f0f6ff,#ffffff); border:1px solid rgba(11,99,214,0.1); border-radius:10px; margin-bottom:1.5rem}
+        .notice-icon{font-size:1.5rem; flex-shrink:0}
+        .program-message{display:flex; gap:1rem; align-items:center; padding:1.5rem; background:linear-gradient(135deg,#fff8e1,#ffffff); border:1px solid rgba(255,193,7,0.2); border-radius:10px; text-align:center; justify-content:center}
+        .message-icon{font-size:2rem}
+
+        /* Registration summary */
+        .registration-summary{background:linear-gradient(135deg,#f0fff4,#ffffff); border:1px solid rgba(34,197,94,0.2); border-radius:12px; padding:1.5rem; margin:1.5rem 0}
+        .summary-header{display:flex; gap:1rem; align-items:flex-start; margin-bottom:1rem}
+        .summary-icon{font-size:2rem}
+        .selected-courses-list{display:flex; flex-wrap:wrap; gap:0.5rem; margin-top:0.5rem}
+        .selected-course-tag{background:var(--blue); color:white; padding:0.3rem 0.8rem; border-radius:20px; font-size:0.85rem; font-weight:500}
+
+        /* Year and semester sections */
+        .year-section{margin-bottom:1.5rem}
+        .semester-section{margin-bottom:1rem}
+
+        /* Courses grid (checkboxes) */
+        .courses-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:0.6rem; margin-top:0.6rem}
+        @media(min-width:1200px){ .courses-grid{grid-template-columns:repeat(3,1fr)} }
+        .course-checkbox{
+          display:flex; gap:0.6rem; align-items:flex-start; padding:0.6rem; border-radius:10px; border:1px solid rgba(11,99,214,0.05);
+          background:linear-gradient(#fff,#fbfdff);
+        }
+        .course-checkbox input{margin-top:6px}
+
+        /* Responsive design */
+        @media(max-width:768px){
+            .registration-steps{flex-direction:column; align-items:center}
+            .step{min-width:auto; width:100%; max-width:300px}
+            .courses-grid{grid-template-columns:1fr}
+        }
+    </style>
+</head>
+<body>
+    <header class="topbar">
+        <div class="container header-inner">
+            <a href="index.html" class="brand">
+                <img src="Image2/logo.jpeg" alt="Department Logo" class="logo" />
+                <span>Dept. of Computing & Informatics</span>
+            </a>
+            <button class="nav-toggle" id="navToggle" aria-label="Open menu">☰</button>
+            <nav class="main-nav" id="mainNav" aria-label="Primary navigation">
+                <a href="admissions.html">Admission</a>
+                <a href="course registration.html" class="active">Course Registration</a>
+               
+            </nav>
+        </div>
+    </header>
+
+    <section class="registration-hero">
+        <div class="container">
+            <h1>Course Registration Portal</h1>
+            <p>Select and register for your courses for the upcoming semester</p>
+
+            <div class="registration-steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Login</h3>
+                    <p>Use your student ID and email to access the system</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Select Program</h3>
+                    <p>Choose your program and current year</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Pick Courses</h3>
+                    <p>Select courses from the available options</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h3>Submit</h3>
+                    <p>Review and submit your registration</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <main class="container">
+        <div class="grid">
+            <!-- Left: main content -->
+            <div>
+                <!-- Course Registration Form -->
+                <section id="register" class="card registration-form" aria-labelledby="register-title">
+                    <div class="form-header">
+                        <div class="form-icon">📚</div>
+                        <div>
+                            <h2 id="register-title" style="color:var(--blue); margin:0 0 0.3rem 0">Course Registration</h2>
+                            <p class="small" style="margin:0">Select your program first, then choose the courses you wish to register for this semester. Student ID and email required.</p>
+                        </div>
+                    </div>
+
+                    <form action="/register-courses" method="post" novalidate class="registration-form-content">
+                        <!-- Student Information Section -->
+                        <fieldset class="form-section">
+                            <legend class="section-title">👨‍🎓 Student Information</legend>
+
+                            <div class="form-row">
+                                <div class="field">
+                                    <label for="stu-id">Student ID *</label>
+                                    <input id="stu-id" name="student_id" type="text" required placeholder="e.g. BUG/CS/2023/001" aria-describedby="stu-id-help">
+                                    <div class="field-help" id="stu-id-help">Your official university student identification number</div>
+                                </div>
+                                <div class="field">
+                                    <label for="stu-email">Student Email *</label>
+                                    <input id="stu-email" name="student_email" type="email" required placeholder="student@bugema.ac.ug" aria-describedby="stu-email-help">
+                                    <div class="field-help" id="stu-email-help">Your official university email address</div>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="field">
+                                    <label for="stu-program">Your Program *</label>
+                                    <select id="stu-program" name="program" required aria-describedby="stu-program-help">
+                                        <option value="">Select your program</option>
+                                        <option value="bse">Bachelor of Science in Software Engineering</option>
+                                        <option value="bit">Bachelor of Science in Information Technology</option>
+                                        <option value="bbc">Bachelor of Business Computing</option>
+                                    </select>
+                                    <div class="field-help" id="stu-program-help">This determines which courses are available for registration</div>
+                                </div>
+                                <div class="field">
+                                    <label for="stu-year">Current Year *</label>
+                                    <select id="stu-year" name="current_year" required>
+                                        <option value="">Select year</option>
+                                        <option value="1">Year 1</option>
+                                        <option value="2">Year 2</option>
+                                        <option value="3">Year 3</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </fieldset>
+
+                        <!-- Course Selection Section -->
+                        <fieldset class="form-section">
+                            <legend class="section-title">📖 Course Selection</legend>
+
+                            <div class="course-selection-notice">
+                                <div class="notice-icon">ℹ️</div>
+                                <div>
+                                    <strong>Important:</strong> Select all courses you wish to register for this semester. You can select multiple courses, but ensure you meet the prerequisites and credit requirements. Contact your academic advisor if unsure.
+                                </div>
+                            </div>
+
+                            <div id="courses-container">
+                                <div id="select-program-msg" class="program-message" role="alert">
+                                    <div class="message-icon">🎯</div>
+                                    <div>
+                                        <strong>Please select your program above</strong> to view available courses for your current year.
+                                    </div>
+                                </div>
+
+                                <!-- BSE Courses -->
+                                <div id="bse-courses" class="program-courses" role="group" aria-label="BSE Courses" style="display:none;">
+                                    <div class="year-section">
+                                        <h4 style="color:var(--blue); margin:0 0 0.5rem 0;">Year 1</h4>
+                                        <div class="semester-section">
+                                            <h5 style="color:var(--blue-dark); margin:0 0 0.3rem 0; font-size:1rem;">Semester 1</h5>
+                                            <div class="courses-grid">
+                                                <label class="course-checkbox"><input type="checkbox" name="courses[]" value="cs101"> <div><strong>CS101</strong> — Introduction to Programming</div></label>
+                                                <label class="course-checkbox"><input type="checkbox" name="courses[]" value="cs102"> <div><strong>CS102</strong> — Computer Systems</div></label>
+                                                <label class="course-checkbox"><input type="checkbox" name="courses[]" value="math101"> <div><strong>MATH101</strong> — Discrete Mathematics</div></label>
+                                                <label class="course-checkbox"><input type="checkbox" name="courses[]" value="eng101"> <div><strong>ENG101</strong> — Communication Skills</div></label>
+                                            </div>
+                                        </div>
+                                        <div class="semester-section">
+                                            <h5 style="color:var(--blue-dark); margin:0.5rem 0 0.3rem 0; font-size:1rem;">Semester 2</h5>
+                                            <div class="courses-grid">
+                                                <label class="course-checkbox"><input type="checkbox" name="courses[]" value="cs201"> <div><strong>CS201</strong> — Data Structures</div></label>
+                                                <label class="course-checkbox"><input type="checkbox" name="courses[]" value="cs202"> <div><strong>CS202</strong> — Object-Oriented Programming</div></label>
+                                                <label class="course-checkbox"><input type="checkbox" name="courses[]" value="math201"> <div><strong>MATH201</strong> — Calculus</div></label>
+                                                <label class="course-checkbox"><input type="checkbox" name="courses[]" value="stat201"> <div><strong>STAT201</strong> — Statistics</div></label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="year-section">
+                                        <h4 style="color:var(--blue); margin:1rem 0 0.5rem 0;">Year 2</h4>
+                                        <div class="semester-section">
+                                            <h5 style="color:var(--blue-dark); margin:0 0 0.3rem 0; font-size:1rem;">Semester 1</h5>
+                                            <div class="courses-grid">
+                                                <label class="course-checkbox"><input type="checkbox" name="courses[]" value="cs301"> <div><strong>CS301</strong> — Algorithms</div></label>
+                                                <label class="course-checkbox"><input type="checkbox" name="courses[]" value="db301"> <div><strong>DB301</strong> — Database Systems</div></label>
+                                                <label class="course-checkbox"><input type="checkbox" name="courses[]" value="se301"> <div><strong>SE301</strong> — Software Engineering</div></label>
+                                                <label class="course-checkbox"><input type="checkbox" name="courses[]" value="web301"> <div><strong>WEB301</strong> — Web Development</div></label>
+                                            </div>
+                                        </div>
+                                        <div class="semester-section">
+                                            <h5 style="color:var(--blue-dark); margin:0.5rem 0 0.3rem 0; font-size:1rem;">Semester 2</h5>
+                                            <div class="courses-grid">
+                                                <label class="course-checkbox"><input type="checkbox" name="courses[]" value="ai401"> <div><strong>AI401</strong> — Artificial Intelligence</div></label>
+                                                <label class="course-checkbox"><input type="checkbox" name="courses[]" value="net401"> <div><strong>NET401</strong> — Computer Networks</div></label>
+                                                <label class="course-checkbox"><input type="checkbox" name="courses[]" value="sec401"> <div><strong>SEC401</strong> — Information Security</div></label>
+                                                <label class="course-checkbox"><input type="checkbox" name="courses[]" value="proj401"> <div><strong>PROJ401</strong> — Project Management</div></label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="year-section">
+                                        <h4 style="color:var(--blue); margin:1rem 0 0.5rem 0;">Year 3</h4>
+                                        <div class="semester-section">
+                                            <h5 style="color:var(--blue-dark); margin:0 0 0.3rem 0; font-size:1rem;">Semester 1</h5>
+                                            <div class="courses-grid">
+                                                <label class="course-checkbox"><input type="checkbox" name="courses[]" value="ml501"> <div><strong>ML501</strong> — Machine Learning</div></label>
+                                                <label class="course-checkbox"><input type="checkbox" name="courses[]" value="mobile501"> <div><strong>MOBILE501</strong> — Mobile App Development</div></label>
+                                                <label class="course-checkbox"><input type="checkbox" name="courses[]" value="cloud501"> <div><strong>CLOUD501</strong> — Cloud Computing</div></label>
+                                                <label class="course-checkbox"><input type="checkbox" name="courses[]" value="ethics501"> <div><strong>ETHICS501</strong> — Professional Ethics</div></label>
+                                            </div>
+                                        </div>
+                                        <div class="semester-section">
+                                            <h5 style="color:var(--blue-dark); margin:0.5rem 0 0.3rem 0; font-size:1rem;">Semester 2</h5>
+                                            <div class="courses-grid">
+                                                <label class="course-checkbox"><input type="checkbox" name="courses[]" value="cap601"> <div><strong>CAP601</strong> — Capstone Project</div></label>
+                                                <label class="course-checkbox"><input type="checkbox" name="courses[]" value="intern601"> <div><strong>INTERN601</strong> — Internship</div></label>
+                                                <label class="course-checkbox"><input type="checkbox" name="courses[]" value="elect601"> <div><strong>ELECT601</strong> — Elective Course</div></label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- BIT Courses -->
+                                <div id="bit-courses" class="program-courses" role="group" aria-label="BIT Courses" style="display:none;">
+                                    <div class="year-section">
+                                        <h4 style="color:var(--blue); margin:0 0 0.5rem 0;">Year 1</h4>
+                                        <div class="semester-section">
+                                            <h5 style="color:var(--blue-dark); margin:0 0 0.3rem 0; font-size:1rem;">Semester 1</h5>
+                                            <div class="courses-grid">
+                                                <label class="course-checkbox"><input type="checkbox" name="courses[]" value="it101"> <div><strong>IT101</strong> — Introduction to IT</div></label>
+                                                <label class="course-checkbox"><input type="checkbox" name="courses[]" value="cs101"> <div><strong>CS101</strong> — Programming Fundamentals</div></label>
+                                                <label class="course-checkbox"><input type="checkbox" name="courses[]" value="math101"> <div><strong>MATH101</strong> — Mathematics for IT</div></label>
+                                                <label class="course-checkbox"><input type="checkbox" name="courses[]" value="bus101"> <div><strong>BUS101</strong> — Business Communication</div></label>
+                                            </div>
+                                        </div>
+                                        <div class="semester-section">
+                                            <h5 style="color:var(--blue-dark); margin:0.5rem 0 0.3rem 0; font-size:1rem;">Semester 2</h5>
+                                            <div class="courses-grid">
+                                                <label class="course-checkbox"><input type="checkbox" name="courses[]" value="net201"> <div><strong>NET201</strong> — Computer Networks</div></label>
+                                                <label class="course-checkbox"><input type="checkbox" name="courses[]" value="db201"> <div><strong>DB201</strong> — Database Management</div></label>
+                                                <label class="course-checkbox"><input type="checkbox" name="courses[]" value="web201"> <div><strong>WEB201</strong> — Web Technologies</div></label>
+                                                <label class="course-checkbox"><input type="checkbox" name="courses[]" value="os201"> <div><strong>OS201</strong> — Operating Systems</div></label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="year-section">
+                                        <h4 style="color:var(--blue); margin:1rem 0 0.5rem 0;">Year 2</h4>
+                                        <div class="semester-section">
+                                            <h5 style="color:var(--blue-dark); margin:0 0 0.3rem 0; font-size:1rem;">Semester 1</h5>
+                                            <div class="courses-grid">
+                                                <label class="course-checkbox"><input type="checkbox" name="courses[]" value="sec301"> <div><strong>SEC301</strong> — Cybersecurity</div></label>
+                                                <label class="course-checkbox"><input type="checkbox" name="courses[]" value="sys301"> <div><strong>SYS301</strong> — System Administration</div></label>
+                                                <label class="course-checkbox"><input type="checkbox" name="courses[]" value="proj301"> <div><strong>PROJ301</strong> — IT Project Management</div></label>
+                                                <label class="course-checkbox"><input type="checkbox" name="courses[]" value="data301"> <div><strong>DATA301</strong> — Data Analytics</div></label>
+                                            </div>
+                                        </div>
+                                        <div class="semester-section">
+                                            <h5 style="color:var(--blue-dark); margin:0.5rem 0 0.3rem 0; font-size:1rem;">Semester 2</h5>
+                                            <div class="courses-grid">
+                                                <label class="course-checkbox"><input type="checkbox" name="courses[]" value="cloud401"> <div><strong>CLOUD401</strong> — Cloud Computing</div></label>
+                                                <label class="course-checkbox"><input type="checkbox" name="courses[]" value="mobile401"> <div><strong>MOBILE401</strong> — Mobile Computing</div></label>
+                                                <label class="course-checkbox"><input type="checkbox" name="courses[]" value="ecom401"> <div><strong>ECOM401</strong> — E-Commerce</div></label>
+                                                <label class="course-checkbox"><input type="checkbox" name="courses[]" value="law401"> <div><strong>LAW401</strong> — IT Law & Ethics</div></label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="year-section">
+                                        <h4 style="color:var(--blue); margin:1rem 0 0.5rem 0;">Year 3</h4>
+                                        <div class="semester-section">
+                                            <h5 style="color:var(--blue-dark); margin:0 0 0.3rem 0; font-size:1rem;">Semester 1</h5>
+                                            <div class="courses-grid">
+                                                <label class="course-checkbox"><input type="checkbox" name="courses[]" value="ai501"> <div><strong>AI501</strong> — Artificial Intelligence</div></label>
+                                                <label class="course-checkbox"><input type="checkbox" name="courses[]" value="big501"> <div><strong>BIG501</strong> — Big Data</div></label>
+                                                <label class="course-checkbox"><input type="checkbox" name="courses[]" value="iot501"> <div><strong>IOT501</strong> — Internet of Things</div></label>
+                                                <label class="course-checkbox"><input type="checkbox" name="courses[]" value="elect501"> <div><strong>ELECT501</strong> — Elective</div></label>
+                                            </div>
+                                        </div>
+                                        <div class="semester-section">
+                                            <h5 style="color:var(--blue-dark); margin:0.5rem 0 0.3rem 0; font-size:1rem;">Semester 2</h5>
+                                            <div class="courses-grid">
+                                                <label class="course-checkbox"><input type="checkbox" name="courses[]" value="cap601"> <div><strong>CAP601</strong> — Capstone Project</div></label>
+                                                <label class="course-checkbox"><input type="checkbox" name="courses[]" value="intern601"> <div><strong>INTERN601</strong> — Internship</div></label>
+                                                <label class="course-checkbox"><input type="checkbox" name="courses[]" value="research601"> <div><strong>RESEARCH601</strong> — Research Methods</div></label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- BBC Courses -->
+                                <div id="bbc-courses" class="program-courses" role="group" aria-label="BBC Courses" style="display:none;">
+                                    <div class="year-section">
+                                        <h4 style="color:var(--blue); margin:0 0 0.5rem 0;">Year 1</h4>
+                                        <div class="semester-section">
+                                            <h5 style="color:var(--blue-dark); margin:0 0 0.3rem 0; font-size:1rem;">Semester 1</h5>
+                                            <div class="courses-grid">
+                                                <label class="course-checkbox"><input type="checkbox" name="courses[]" value="bus101"> <div><strong>BUS101</strong> — Introduction to Business</div></label>
+                                                <label class="course-checkbox"><input type="checkbox" name="courses[]" value="cs101"> <div><strong>CS101</strong> — Computer Fundamentals</div></label>
+                                                <label class="course-checkbox"><input type="checkbox" name="courses[]" value="math101"> <div><strong>MATH101</strong> — Business Mathematics</div></label>
+                                                <label class="course-checkbox"><input type="checkbox" name="courses[]" value="acc101"> <div><strong>ACC101</strong> — Accounting Principles</div></label>
+                                            </div>
+                                        </div>
+                                        <div class="semester-section">
+                                            <h5 style="color:var(--blue-dark); margin:0.5rem 0 0.3rem 0; font-size:1rem;">Semester 2</h5>
+                                            <div class="courses-grid">
+                                                <label class="course-checkbox"><input type="checkbox" name="courses[]" value="db201"> <div><strong>DB201</strong> — Database Systems</div></label>
+                                                <label class="course-checkbox"><input type="checkbox" name="courses[]" value="prog201"> <div><strong>PROG201</strong> — Programming for Business</div></label>
+                                                <label class="course-checkbox"><input type="checkbox" name="courses[]" value="stat201"> <div><strong>STAT201</strong> — Business Statistics</div></label>
+                                                <label class="course-checkbox"><input type="checkbox" name="courses[]" value="mgmt201"> <div><strong>MGMT201</strong> — Management Information Systems</div></label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="year-section">
+                                        <h4 style="color:var(--blue); margin:1rem 0 0.5rem 0;">Year 2</h4>
+                                        <div class="semester-section">
+                                            <h5 style="color:var(--blue-dark); margin:0 0 0.3rem 0; font-size:1rem;">Semester 1</h5>
+                                            <div class="courses-grid">
+                                                <label class="course-checkbox"><input type="checkbox" name="courses[]" value="erp301"> <div><strong>ERP301</strong> — ERP Systems</div></label>
+                                                <label class="course-checkbox"><input type="checkbox" name="courses[]" value="ecom301"> <div><strong>ECOM301</strong> — E-Commerce</div></label>
+                                                <label class="course-checkbox"><input type="checkbox" name="courses[]" value="data301"> <div><strong>DATA301</strong> — Data Analytics</div></label>
+                                                <label class="course-checkbox"><input type="checkbox" name="courses[]" value="sec301"> <div><strong>SEC301</strong> — Information Security</div></label>
+                                            </div>
+                                        </div>
+                                        <div class="semester-section">
+                                            <h5 style="color:var(--blue-dark); margin:0.5rem 0 0.3rem 0; font-size:1rem;">Semester 2</h5>
+                                            <div class="courses-grid">
+                                                <label class="course-checkbox"><input type="checkbox" name="courses[]" value="sys401"> <div><strong>SYS401</strong> — Business Systems Analysis</div></label>
+                                                <label class="course-checkbox"><input type="checkbox" name="courses[]" value="proj401"> <div><strong>PROJ401</strong> — IT Project Management</div></label>
+                                                <label class="course-checkbox"><input type="checkbox" name="courses[]" value="web401"> <div><strong>WEB401</strong> — Web Development</div></label>
+                                                <label class="course-checkbox"><input type="checkbox" name="courses[]" value="law401"> <div><strong>LAW401</strong> — Business Law</div></label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="year-section">
+                                        <h4 style="color:var(--blue); margin:1rem 0 0.5rem 0;">Year 3</h4>
+                                        <div class="semester-section">
+                                            <h5 style="color:var(--blue-dark); margin:0 0 0.3rem 0; font-size:1rem;">Semester 1</h5>
+                                            <div class="courses-grid">
+                                                <label class="course-checkbox"><input type="checkbox" name="courses[]" value="ai501"> <div><strong>AI501</strong> — Business Intelligence</div></label>
+                                                <label class="course-checkbox"><input type="checkbox" name="courses[]" value="cloud501"> <div><strong>CLOUD501</strong> — Cloud Computing</div></label>
+                                                <label class="course-checkbox"><input type="checkbox" name="courses[]" value="mobile501"> <div><strong>MOBILE501</strong> — Mobile Business Solutions</div></label>
+                                                <label class="course-checkbox"><input type="checkbox" name="courses[]" value="elect501"> <div><strong>ELECT501</strong> — Elective</div></label>
+                                            </div>
+                                        </div>
+                                        <div class="semester-section">
+                                            <h5 style="color:var(--blue-dark); margin:0.5rem 0 0.3rem 0; font-size:1rem;">Semester 2</h5>
+                                            <div class="courses-grid">
+                                                <label class="course-checkbox"><input type="checkbox" name="courses[]" value="cap601"> <div><strong>CAP601</strong> — Capstone Project</div></label>
+                                                <label class="course-checkbox"><input type="checkbox" name="courses[]" value="intern601"> <div><strong>INTERN601</strong> — Internship</div></label>
+                                                <label class="course-checkbox"><input type="checkbox" name="courses[]" value="strat601"> <div><strong>STRAT601</strong> — Strategic IT Management</div></label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+
+                        <!-- Registration Summary -->
+                        <div class="registration-summary" id="registration-summary" style="display:none;">
+                            <div class="summary-header">
+                                <div class="summary-icon">📊</div>
+                                <div>
+                                    <h4 style="color:var(--blue); margin:0 0 0.3rem 0;">Registration Summary</h4>
+                                    <div id="selected-courses-count">0 courses selected</div>
+                                </div>
+                            </div>
+                            <div id="selected-courses-list" class="selected-courses-list"></div>
+                        </div>
+
+                        <div class="registration-notice">
+                            <div class="notice-icon">⚠️</div>
+                            <div>
+                                <strong>Important:</strong> If you are unsure which courses to select, consult your academic advisor or the course timetables. Some courses have prerequisites. You can modify your registration up to the add/drop deadline.
+                            </div>
+                        </div>
+
+                        <div class="form-actions" role="group" aria-label="Registration actions">
+                            <button type="submit" class="btn primary-btn" id="submit-registration">
+                                <span class="btn-icon">✅</span>
+                                Submit Registration
+                            </button>
+                            <button type="button" class="btn outline" onclick="clearSelection()">
+                                <span class="btn-icon">🗑️</span>
+                                Clear Selection
+                            </button>
+                            <a class="btn outline" href="timtable.html">
+                                <span class="btn-icon">📅</span>
+                                View Timetable
+                            </a>
+                        </div>
+
+                        <div class="form-progress" id="registration-progress" style="display:none;">
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="registration-progress-fill"></div>
+                            </div>
+                            <div class="progress-text" id="registration-progress-text">Submitting registration...</div>
+                        </div>
+                    </form>
+                </section>
+
+                <!-- Optional: Bulk upload for admin -->
+                <section class="card" aria-labelledby="bulk-title" style="margin-top:1rem">
+                    <h3 id="bulk-title" style="color:var(--blue); margin:0 0 0.5rem 0">Admin / Bulk Registration</h3>
+                    <p class="small">Department staff can upload CSV files for batch course registration.</p>
+                    <form action="/admin/bulk-register" method="post" enctype="multipart/form-data">
+                        <label for="bulk-file" style="font-weight:600; color:var(--blue); margin-bottom:0.35rem; display:block">Upload CSV</label>
+                        <input id="bulk-file" name="bulk_csv" type="file" accept=".csv">
+                        <div style="margin-top:0.6rem" class="small">CSV format: student_id,student_email,course_codes(comma-separated)</div>
+                        <div class="form-actions" style="margin-top:0.6rem">
+                            <button class="btn" type="submit">Upload</button>
+                            <a class="btn outline" href="downloads/registration-template.csv">Download template</a>
+                        </div>
+                    </form>
+                </section>
+            </div>
+
+            <!-- Right: sidebar -->
+            <aside class="sidebar">
+                <div class="card">
+                    <h3 style="color:var(--blue); margin:0 0 0.5rem 0">Student Portal</h3>
+                    <p class="small">Access academic records, register courses, pay fees and download results.</p>
+
+                    <div style="margin-top:0.75rem">
+                        <a class="btn" href="https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://erms.bugemauniv.ac.ug/student/login/&ved=2ahUKEwiH9oL3yLCTAxWyV6QEHVS_HzoQFnoECA4QAQ&sqi=2&usg=AOvVaw03dw8WxM5R-ePM-65IioSg" target="_blank" rel="noopener">Go to Student Portal</a>
+                    </div>
+
+                    <div class="portal-features" style="margin-top:0.8rem">
+                        <div class="feature"><div class="icon">1</div><div><strong>Course Registration</strong><div class="small">Add/drop courses and view timetables.</div></div></div>
+                        <div class="feature"><div class="icon">2</div><div><strong>Fee Payment</strong><div class="small">Secure payment and receipts.</div></div></div>
+                        <div class="feature"><div class="icon">3</div><div><strong>Results & Transcripts</strong><div class="small">View grades and request transcripts.</div></div></div>
+                        <div class="feature"><div class="icon">4</div><div><strong>Support</strong><div class="small">Submit support tickets and FAQs.</div></div></div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3 style="color:var(--blue); margin:0 0 0.5rem 0">Registration Checklist</h3>
+                    <ul style="color:var(--muted); margin:0.5rem 0 0 1rem">
+                        <li>Valid student ID and email</li>
+                        <li>Correct program and year selection</li>
+                        <li>Prerequisite courses completed</li>
+                        <li>Credit limit not exceeded</li>
+                        <li>Registration deadline observed</li>
+                    </ul>
+                    <div style="margin-top:0.6rem">
+                        <a class="btn outline" href="downloads/registration-guide.pdf">Download guide</a>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3 style="color:var(--blue); margin:0 0 0.5rem 0">Important Dates</h3>
+                    <div class="small">
+                        <strong>Registration opens:</strong> 15 Aug<br>
+                        <strong>Add/drop deadline:</strong> 30 Aug<br>
+                        <strong>Semester starts:</strong> 5 Sep<br>
+                        <strong>Withdrawal deadline:</strong> 15 Oct
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3 style="color:var(--blue); margin:0 0 0.5rem 0">Contact Registration</h3>
+                    <div class="small">
+                        Email: registration@bugema.ac.ug<br>
+                        Dept: computing@bugema.ac.ug<br>
+                        Phone: +256 123 456 789<br>
+                        Office: Room 205, Computing Block
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            © Bugema University — Department of Computing & Informatics • For assistance with course registration call +256 123 456 789
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Course registration functionality
+            const programSelect = document.getElementById('stu-program');
+            const yearSelect = document.getElementById('stu-year');
+            const courseContainers = document.querySelectorAll('.program-courses');
+            const selectMsg = document.getElementById('select-program-msg');
+            const registrationSummary = document.getElementById('registration-summary');
+            const selectedCoursesCount = document.getElementById('selected-courses-count');
+            const selectedCoursesList = document.getElementById('selected-courses-list');
+
+            function updateCourseDisplay() {
+                const selectedProgram = programSelect.value;
+                const selectedYear = yearSelect.value;
+
+                // Hide all course containers
+                courseContainers.forEach(container => {
+                    container.style.display = 'none';
+                });
+
+                // Show/hide message and summary
+                if (selectedProgram && selectedYear) {
+                    selectMsg.style.display = 'none';
+                    registrationSummary.style.display = 'block';
+
+                    const selectedContainer = document.getElementById(selectedProgram + '-courses');
+                    if (selectedContainer) {
+                        selectedContainer.style.display = 'block';
+
+                        // Show only the selected year
+                        const yearSections = selectedContainer.querySelectorAll('.year-section');
+                        yearSections.forEach((section, index) => {
+                            section.style.display = (index + 1) == selectedYear ? 'block' : 'none';
+                        });
+                    }
+                } else {
+                    selectMsg.style.display = 'flex';
+                    registrationSummary.style.display = 'none';
+                }
+
+                updateRegistrationSummary();
+            }
+
+            if (programSelect) {
+                programSelect.addEventListener('change', updateCourseDisplay);
+            }
+
+            if (yearSelect) {
+                yearSelect.addEventListener('change', updateCourseDisplay);
+            }
+
+            // Update registration summary when courses are selected
+            document.addEventListener('change', function(e) {
+                if (e.target.type === 'checkbox' && e.target.name === 'courses[]') {
+                    updateRegistrationSummary();
+                }
+            });
+
+            function updateRegistrationSummary() {
+                const selectedCheckboxes = document.querySelectorAll('input[name="courses[]"]:checked');
+                const count = selectedCheckboxes.length;
+
+                selectedCoursesCount.textContent = count + ' course' + (count !== 1 ? 's' : '') + ' selected';
+
+                selectedCoursesList.innerHTML = '';
+                selectedCheckboxes.forEach(checkbox => {
+                    const courseCode = checkbox.value;
+                    const courseName = checkbox.parentElement.textContent.trim().split(' — ')[1];
+                    const tag = document.createElement('span');
+                    tag.className = 'selected-course-tag';
+                    tag.textContent = courseCode;
+                    tag.title = courseName;
+                    selectedCoursesList.appendChild(tag);
+                });
+            }
+
+            // Clear selection function
+            window.clearSelection = function() {
+                const checkboxes = document.querySelectorAll('input[name="courses[]"]');
+                checkboxes.forEach(checkbox => {
+                    checkbox.checked = false;
+                });
+                updateRegistrationSummary();
+            };
+
+            // Form validation enhancement
+            const forms = document.querySelectorAll('form');
+            forms.forEach(form => {
+                form.addEventListener('submit', function(e) {
+                    const requiredFields = form.querySelectorAll('[required]');
+                    let isValid = true;
+
+                    requiredFields.forEach(field => {
+                        if (!field.value.trim()) {
+                            field.style.borderColor = '#dc3545';
+                            isValid = false;
+                        } else {
+                            field.style.borderColor = '';
+                        }
+                    });
+
+                    if (!isValid) {
+                        e.preventDefault();
+                        alert('Please fill in all required fields.');
+                    }
+                });
+            });
+
+            // Enhanced form field validation feedback
+            const inputs = document.querySelectorAll('input, select, textarea');
+            inputs.forEach(input => {
+                input.addEventListener('blur', function() {
+                    if (this.hasAttribute('required') && !this.value.trim()) {
+                        this.style.borderColor = '#dc3545';
+                    } else {
+                        this.style.borderColor = '';
+                    }
+                });
+
+                input.addEventListener('input', function() {
+                    if (this.style.borderColor === 'rgb(220, 53, 69)') {
+                        this.style.borderColor = '';
+                    }
+                });
+            });
+
+            // Mobile navigation toggle
+            const navToggle = document.getElementById('navToggle');
+            const mainNav = document.getElementById('mainNav');
+
+            if (navToggle && mainNav) {
+                navToggle.addEventListener('click', function() {
+                    mainNav.classList.toggle('active');
+                    navToggle.setAttribute('aria-expanded', mainNav.classList.contains('active'));
+                });
+            }
+        });
+    </script>
+</body>
+</html>
