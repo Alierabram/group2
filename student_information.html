@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Student Information Form - Department of Computing and Informatics</title>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+        /* Student Information Form - Premium Design */
+        .student-form-hero {
+            background: linear-gradient(135deg, #0f3c78 0%, #072c53 100%);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+        }
+
+        .student-form-hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        .student-form-hero p {
+            font-size: 1.1rem;
+            opacity: 0.95;
+            margin-bottom: 0;
+        }
+
+        /* Main form container */
+        .student-form-container {
+            max-width: 900px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        /* Form card styling */
+        .student-form-card {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 10px 40px rgba(15, 60, 120, 0.12);
+            overflow: hidden;
+            animation: slideUp 0.5s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Form header */
+        .form-card-header {
+            background: linear-gradient(135deg, #0f3c78 0%, #1851a9 100%);
+            color: white;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .form-card-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 300px;
+            height: 300px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+        }
+
+        .form-card-header h2 {
+            margin: 0 0 0.5rem 0;
+            font-size: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .form-card-header p {
+            margin: 0;
+            opacity: 0.95;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Form body */
+        .form-card-body {
+            padding: 2.5rem;
+        }
+
+        /* Form sections */
+        .form-section-group {
+            margin-bottom: 2.5rem;
+        }
+
+        .form-section-group h3 {
+            color: #0f3c78;
+            font-size: 1.3rem;
+            margin: 0 0 1.5rem 0;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid #0f3c78;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Form grid layout */
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-grid.full {
+            grid-template-columns: 1fr;
+        }
+
+        .form-grid.three-col {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        @media (max-width: 768px) {
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+            .form-grid.three-col {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Form field styling */
+        .form-field {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-field label {
+            font-weight: 600;
+            color: #0d1f44;
+            margin-bottom: 0.6rem;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .form-field label .required {
+            color: #d32f2f;
+            font-weight: bold;
+        }
+
+        .form-field input,
+        .form-field select,
+        .form-field textarea {
+            padding: 0.85rem 1rem;
+            border: 2px solid #e0e7f1;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-family: inherit;
+            transition: all 0.3s ease;
+            background: #f8fafc;
+        }
+
+        .form-field input:focus,
+        .form-field select:focus,
+        .form-field textarea:focus {
+            outline: none;
+            border-color: #0f3c78;
+            background: white;
+            box-shadow: 0 0 0 4px rgba(15, 60, 120, 0.1);
+        }
+
+        .form-field textarea {
+            resize: vertical;
+            min-height: 100px;
+            font-family: inherit;
+        }
+
+        /* Field help text */
+        .field-hint {
+            font-size: 0.85rem;
+            color: #666;
+            margin-top: 0.4rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.3rem;
+        }
+
+        .field-hint::before {
+            content: 'ℹ';
+            color: #0f3c78;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        /* Radio and Checkbox styling */
+        .form-options {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+            margin-top: 0.8rem;
+        }
+
+        .radio-option,
+        .checkbox-option {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 0.8rem 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 1px solid transparent;
+        }
+
+        .radio-option:hover,
+        .checkbox-option:hover {
+            background: #f0f6ff;
+            border-color: #0f3c78;
+        }
+
+        .radio-option input,
+        .checkbox-option input {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+            accent-color: #0f3c78;
+        }
+
+        .option-label {
+            cursor: pointer;
+            flex: 1;
+        }
+
+        /* Form actions */
+        .form-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2.5rem;
+            padding-top: 2rem;
+            border-top: 1px solid #e0e7f1;
+            justify-content: flex-end;
+        }
+
+        .btn {
+            padding: 0.9rem 2rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #0f3c78 0%, #072c53 100%);
+            color: white;
+            box-shadow: 0 4px 12px rgba(15, 60, 120, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(15, 60, 120, 0.4);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: #0f3c78;
+            border: 2px solid #0f3c78;
+        }
+
+        .btn-secondary:hover {
+            background: #f0f6ff;
+            transform: translateY(-2px);
+        }
+
+        /* Progress indicator */
+        .form-progress-bar {
+            height: 6px;
+            background: #e0e7f1;
+            border-radius: 3px;
+            overflow: hidden;
+            margin-bottom: 2rem;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #0f3c78 0%, #1851a9 100%);
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+
+        /* Success message */
+        .success-message {
+            background: #e8f5e9;
+            border-left: 4px solid #4caf50;
+            padding: 1.2rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            display: none;
+            color: #2e7d32;
+            font-weight: 500;
+        }
+
+        .success-message.show {
+            display: block;
+            animation: slideDown 0.4s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .student-form-hero h1 {
+                font-size: 2rem;
+            }
+
+            .form-card-body {
+                padding: 1.5rem;
+            }
+
+            .form-actions {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="topbar">
+        <div class="container header-inner">
+            <a href="index.html" class="brand">
+                <img src="Image2/logo.jpeg" alt="Department Logo" class="logo" />
+                <span>Dept. of Computing & Informatics</span>
+            </a>
+            <button class="nav-toggle" id="navToggle" aria-label="Open menu">☰</button>
+            <nav class="main-nav" id="mainNav" aria-label="Primary navigation">
+                <a href="admissions.html">Admission</a>
+                <a href="course registration.html">Course Registration</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="student-form-hero">
+        <div class="container">
+            <h1>Student Information Form</h1>
+            <p>Complete your student profile and keep your information up to date</p>
+        </div>
+    </section>
+
+    <!-- Main Form -->
+    <main class="student-form-container">
+        <div class="student-form-card">
+            <!-- Form Header -->
+            <div class="form-card-header">
+                <h2>👨‍🎓 Your Information</h2>
+                <p>Please ensure all information is accurate and complete</p>
+            </div>
+
+            <!-- Form Body -->
+            <div class="form-card-body">
+                <!-- Success Message -->
+                <div class="success-message" id="successMessage">
+                    ✓ Your information has been submitted successfully!
+                </div>
+
+                <!-- Progress Bar -->
+                <div class="form-progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+
+                <form id="studentForm" action="/student-info" method="post" novalidate>
+                    <!-- Personal Information Section -->
+                    <div class="form-section-group">
+                        <h3>📋 Personal Information</h3>
+                        
+                        <div class="form-grid">
+                            <div class="form-field">
+                                <label>
+                                    First Name
+                                    <span class="required">*</span>
+                                </label>
+                                <input type="text" name="first_name" placeholder="John" required>
+                                <div class="field-hint">Your first name as it appears in official documents</div>
+                            </div>
+                            <div class="form-field">
+                                <label>
+                                    Last Name
+                                    <span class="required">*</span>
+                                </label>
+                                <input type="text" name="last_name" placeholder="Doe" required>
+                                <div class="field-hint">Your last name as it appears in official documents</div>
+                            </div>
+                        </div>
+
+                        <div class="form-grid">
+                            <div class="form-field">
+                                <label>
+                                    Date of Birth
+                                    <span class="required">*</span>
+                                </label>
+                                <input type="date" name="date_of_birth" required>
+                            </div>
+                            <div class="form-field">
+                                <label>
+                                    Gender
+                                    <span class="required">*</span>
+                                </label>
+                                <select name="gender" required>
+                                    <option value="">Select gender</option>
+                                    <option value="male">Male</option>
+                                    <option value="female">Female</option>
+                                    <option value="other">Other</option>
+                                    <option value="prefer-not">Prefer not to say</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-field full">
+                            <label>
+                                Identification Number (National ID/Passport)
+                                <span class="required">*</span>
+                            </label>
+                            <input type="text" name="id_number" placeholder="e.g., 123-456-789-0" required>
+                            <div class="field-hint">Your national ID or passport number</div>
+                        </div>
+                    </div>
+
+                    <!-- Academic Information Section -->
+                    <div class="form-section-group">
+                        <h3>🎓 Academic Information</h3>
+
+                        <div class="form-grid">
+                            <div class="form-field">
+                                <label>
+                                    Student ID
+                                    <span class="required">*</span>
+                                </label>
+                                <input type="text" name="student_id" placeholder="BUG/CS/2023/001" required>
+                                <div class="field-hint">Your official university student ID</div>
+                            </div>
+                            <div class="form-field">
+                                <label>
+                                    Program
+                                    <span class="required">*</span>
+                                </label>
+                                <select name="program" required>
+                                    <option value="">Select your program</option>
+                                    <option value="bse">Bachelor of Science in Software Engineering</option>
+                                    <option value="bit">Bachelor of Science in Information Technology</option>
+                                    <option value="bbc">Bachelor of Business Computing</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-grid">
+                            <div class="form-field">
+                                <label>
+                                    Current Year
+                                    <span class="required">*</span>
+                                </label>
+                                <select name="current_year" required>
+                                    <option value="">Select year</option>
+                                    <option value="1">Year 1</option>
+                                    <option value="2">Year 2</option>
+                                    <option value="3">Year 3</option>
+                                </select>
+                            </div>
+                            <div class="form-field">
+                                <label>
+                                    Admission Date
+                                    <span class="required">*</span>
+                                </label>
+                                <input type="date" name="admission_date" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Contact Information Section -->
+                    <div class="form-section-group">
+                        <h3>📱 Contact Information</h3>
+
+                        <div class="form-grid">
+                            <div class="form-field">
+                                <label>
+                                    University Email
+                                    <span class="required">*</span>
+                                </label>
+                                <input type="email" name="university_email" placeholder="student@bugema.ac.ug" required>
+                                <div class="field-hint">Your official university email address</div>
+                            </div>
+                            <div class="form-field">
+                                <label>
+                                    Personal Email
+                                </label>
+                                <input type="email" name="personal_email" placeholder="your.email@gmail.com">
+                            </div>
+                        </div>
+
+                        <div class="form-grid">
+                            <div class="form-field">
+                                <label>
+                                    Phone Number (Primary)
+                                    <span class="required">*</span>
+                                </label>
+                                <input type="tel" name="phone_primary" placeholder="+256 701 234 567" required>
+                            </div>
+                            <div class="form-field">
+                                <label>
+                                    Phone Number (Secondary)
+                                </label>
+                                <input type="tel" name="phone_secondary" placeholder="+256 701 234 567">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Address Information Section -->
+                    <div class="form-section-group">
+                        <h3>📍 Address Information</h3>
+
+                        <div class="form-field full">
+                            <label>
+                                Street Address
+                                <span class="required">*</span>
+                            </label>
+                            <input type="text" name="street_address" placeholder="123 Main Street" required>
+                        </div>
+
+                        <div class="form-grid">
+                            <div class="form-field">
+                                <label>
+                                    City
+                                    <span class="required">*</span>
+                                </label>
+                                <input type="text" name="city" placeholder="Kampala" required>
+                            </div>
+                            <div class="form-field">
+                                <label>
+                                    District
+                                    <span class="required">*</span>
+                                </label>
+                                <input type="text" name="district" placeholder="Kampala" required>
+                            </div>
+                        </div>
+
+                        <div class="form-grid">
+                            <div class="form-field">
+                                <label>
+                                    Country
+                                    <span class="required">*</span>
+                                </label>
+                                <input type="text" name="country" placeholder="Uganda" required>
+                            </div>
+                            <div class="form-field">
+                                <label>
+                                    Postal Code
+                                </label>
+                                <input type="text" name="postal_code" placeholder="00100">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Emergency Contact Section -->
+                    <div class="form-section-group">
+                        <h3>🆘 Emergency Contact</h3>
+
+                        <div class="form-grid">
+                            <div class="form-field">
+                                <label>
+                                    Emergency Contact Name
+                                    <span class="required">*</span>
+                                </label>
+                                <input type="text" name="emergency_name" placeholder="Jane Doe" required>
+                            </div>
+                            <div class="form-field">
+                                <label>
+                                    Relationship
+                                    <span class="required">*</span>
+                                </label>
+                                <select name="emergency_relationship" required>
+                                    <option value="">Select relationship</option>
+                                    <option value="parent">Parent</option>
+                                    <option value="sibling">Sibling</option>
+                                    <option value="spouse">Spouse</option>
+                                    <option value="guardian">Guardian</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-grid">
+                            <div class="form-field">
+                                <label>
+                                    Emergency Contact Phone
+                                    <span class="required">*</span>
+                                </label>
+                                <input type="tel" name="emergency_phone" placeholder="+256 701 234 567" required>
+                            </div>
+                            <div class="form-field">
+                                <label>
+                                    Emergency Contact Email
+                                </label>
+                                <input type="email" name="emergency_email" placeholder="guardian@example.com">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Additional Information Section -->
+                    <div class="form-section-group">
+                        <h3>ℹ️ Additional Information</h3>
+
+                        <div class="form-field full">
+                            <label>
+                                Disabilities or Special Needs (if any)
+                            </label>
+                            <textarea name="special_needs" placeholder="Please describe any disabilities or special needs that we should be aware of to provide appropriate support..."></textarea>
+                            <div class="field-hint">This information helps us provide necessary accommodations</div>
+                        </div>
+
+                        <div class="form-field full">
+                            <label>
+                                How did you hear about our program?
+                            </label>
+                            <div class="form-options">
+                                <label class="radio-option">
+                                    <input type="radio" name="how_heard" value="website">
+                                    <span class="option-label">Official Website</span>
+                                </label>
+                                <label class="radio-option">
+                                    <input type="radio" name="how_heard" value="social_media">
+                                    <span class="option-label">Social Media</span>
+                                </label>
+                                <label class="radio-option">
+                                    <input type="radio" name="how_heard" value="counselor">
+                                    <span class="option-label">School Counselor</span>
+                                </label>
+                                <label class="radio-option">
+                                    <input type="radio" name="how_heard" value="friend">
+                                    <span class="option-label">Friend/Family</span>
+                                </label>
+                                <label class="radio-option">
+                                    <input type="radio" name="how_heard" value="other">
+                                    <span class="option-label">Other</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-field full">
+                            <label class="checkbox-option">
+                                <input type="checkbox" name="agree_terms" required>
+                                <span class="option-label">I certify that the information provided in this form is true and accurate</span>
+                            </label>
+                        </div>
+
+                        <div class="form-field full">
+                            <label class="checkbox-option">
+                                <input type="checkbox" name="agree_privacy">
+                                <span class="option-label">I agree to the privacy policy and data handling practices</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Form Actions -->
+                    <div class="form-actions">
+                        <button type="reset" class="btn btn-secondary">
+                            ↻ Clear Form
+                        </button>
+                        <button type="submit" class="btn btn-primary">
+                            ✓ Submit Information
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer placeholder -->
+    <footer style="text-align: center; padding: 2rem; color: #666; margin-top: 3rem; border-top: 1px solid #e0e7f1;">
+        <p>&copy; 2024 Department of Computing & Informatics. All rights reserved.</p>
+    </footer>
+
+    <script>
+        const form = document.getElementById('studentForm');
+        const progressFill = document.getElementById('progressFill');
+        const successMessage = document.getElementById('successMessage');
+
+        // Update progress bar as user fills form
+        form.addEventListener('change', updateProgress);
+        form.addEventListener('input', updateProgress);
+
+        function updateProgress() {
+            const formElements = form.querySelectorAll('input[required], select[required], textarea[required]');
+            let filledCount = 0;
+
+            formElements.forEach(element => {
+                if (element.type === 'checkbox' || element.type === 'radio') {
+                    if (element.checked) filledCount++;
+                } else if (element.value.trim() !== '') {
+                    filledCount++;
+                }
+            });
+
+            const progress = (filledCount / formElements.length) * 100;
+            progressFill.style.width = progress + '%';
+        }
+
+        // Handle form submission
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            // Show success message
+            successMessage.classList.add('show');
+
+            // Reset form after 2 seconds
+            setTimeout(() => {
+                form.reset();
+                progressFill.style.width = '0%';
+                successMessage.classList.remove('show');
+            }, 3000);
+
+            // In a real application, you would send the data to a server here
+            console.log('Form submitted with data:', new FormData(form));
+        });
+
+        // Mobile menu toggle
+        const navToggle = document.getElementById('navToggle');
+        const mainNav = document.getElementById('mainNav');
+
+        navToggle.addEventListener('click', () => {
+            mainNav.style.display = mainNav.style.display === 'none' ? 'flex' : 'none';
+        });
+    </script>
+</body>
+</html>
