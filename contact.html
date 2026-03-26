@@ -1,0 +1,319 @@
+
+   <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Contact Us — Department of Computing &amp; Informatics</title>
+  <meta name="description" content="Contact the Department of Computing &amp; Informatics. Phone, WhatsApp, TikTok, email addresses, office location, staff directory and hours." />
+  <link rel="stylesheet" href="style.css">
+  <style>
+    :root{
+      --blue:#0f3c78;
+      --blue-dark:#072c53;
+      --white:#ffffff;
+      --light-bg:#edf5ff;
+      --text:#0b2245;
+      --muted:#5a7a99;
+      --shadow:0 4px 12px rgba(15,60,120,0.1);
+      --radius:8px;
+      --transition:all 0.3s ease;
+      --container:1100px;
+    }
+    *{box-sizing:border-box; margin:0; padding:0}
+    body{font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial; color:var(--text); background:linear-gradient(180deg, var(--light-bg) 0%, var(--white) 100%); -webkit-font-smoothing:antialiased; line-height:1.6}
+    .container{max-width:var(--container); margin:0 auto; padding:1rem}
+
+    /* Header */
+    header{display:flex; align-items:center; gap:1rem; padding:0.75rem 0; background:var(--white); border-bottom:2px solid var(--blue)}
+    .brand{display:flex; align-items:center; gap:0.8rem; color:var(--blue); font-weight:700; text-decoration:none}
+    .brand img{width:46px; height:46px; border-radius:50%; background:var(--white)}
+    nav{margin-left:auto;display:flex; gap:0.6rem}
+    nav a{padding:0.5rem 1rem; border-radius:6px; font-weight:600; color:var(--blue); text-decoration:none; transition:var(--transition)}
+    nav a:hover{background:var(--blue); color:var(--white)}
+    nav a.active{background:var(--blue); color:var(--white)}
+
+    /* Welcome Staff Section */
+    .welcome-staff{display:grid; grid-template-columns:2fr 1fr; gap:2rem; align-items:center; margin:1.5rem 0; padding:2rem; background:linear-gradient(135deg, var(--white) 0%, rgba(237,245,255,0.5) 100%); border-radius:var(--radius); box-shadow:var(--shadow); border:1px solid rgba(15,60,120,0.1)}
+    .welcome-staff h2{color:var(--blue); font-size:1.8rem; margin-bottom:0.5rem}
+    .welcome-staff p{color:var(--muted); font-size:0.95rem; margin:0}
+    .welcome-staff img{width:100%; max-width:400px; height:auto; border-radius:var(--radius); box-shadow:var(--shadow); border:3px solid var(--blue)}
+    @media(max-width:768px){.welcome-staff{grid-template-columns:1fr; text-align:center; gap:1.5rem}}
+
+    /* Hero Section */
+    .hero{margin:1.5rem 0; padding:2rem}
+    .hero h1{font-size:2.5rem; color:var(--blue); margin-bottom:1rem}
+    .hero .lead{font-size:1rem; color:var(--muted)}
+
+    /* Contact Methods */
+    .contacts{display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:1rem; margin:2rem 0}
+    .method{display:flex; gap:1rem; align-items:center; padding:1.2rem; background:var(--white); border-radius:var(--radius); box-shadow:var(--shadow); border-left:4px solid var(--blue); transition:var(--transition)}
+    .method:hover{transform:translateY(-3px); box-shadow:0 8px 16px rgba(15,60,120,0.15)}
+    .method .icon{width:50px; height:50px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:700; color:var(--white); background:var(--blue); flex-shrink:0}
+    .method .meta{flex:1}
+    .method h3{margin:0 0 0.3rem 0; color:var(--blue); font-size:1rem}
+    .method a{color:var(--blue); font-weight:600; text-decoration:none}
+    .method a:hover{text-decoration:underline}
+    .helper{color:var(--muted); font-size:0.85rem}
+
+    /* Quick Links */
+    .quick-links{margin:2rem 0; padding:2rem; background:linear-gradient(135deg, var(--blue) 0%, var(--blue-dark) 100%); border-radius:var(--radius); color:var(--white)}
+    .quick-links h2{margin-bottom:1.5rem; text-align:center; font-size:1.5rem; color:var(--white)}
+    .quick-links > div{display:flex; gap:1rem; flex-wrap:wrap; justify-content:center}
+    .quick-links a{padding:0.75rem 1.5rem; background:rgba(255,255,255,0.2); color:var(--white); text-decoration:none; border-radius:6px; font-weight:600; transition:var(--transition); border:1px solid rgba(255,255,255,0.3)}
+    .quick-links a:hover{background:rgba(255,255,255,0.3); transform:translateY(-2px)}
+
+    /* Grid Layout */
+    .grid{display:grid; grid-template-columns:2fr 1fr; gap:2rem; margin:2rem 0}
+    @media(max-width:980px){.grid{grid-template-columns:1fr}}
+
+    /* Contact Form */
+    .contact-form{background:var(--white); padding:2rem; border-radius:var(--radius); box-shadow:var(--shadow)}
+    .contact-form h2{color:var(--blue); margin-bottom:1rem}
+    .contact-form .row{display:flex; gap:1rem}
+    @media(max-width:600px){.contact-form .row{flex-direction:column}}
+    .contact-form input, .contact-form select, .contact-form textarea{width:100%; padding:0.8rem; border:1px solid rgba(15,60,120,0.15); border-radius:6px; font-size:1rem; transition:var(--transition)}
+    .contact-form input:focus, .contact-form select:focus, .contact-form textarea:focus{outline:none; border-color:var(--blue); background:var(--light-bg); box-shadow:0 0 0 3px rgba(15,60,120,0.1)}
+    .contact-form textarea{min-height:120px; resize:vertical}
+    .btn{background:var(--blue); color:var(--white); padding:0.8rem 2rem; border:none; border-radius:6px; font-weight:700; cursor:pointer; transition:var(--transition)}
+    .btn:hover{background:var(--blue-dark); transform:translateY(-2px)}
+
+    /* Cards */
+    .card{background:var(--white); border-radius:var(--radius); padding:1.5rem; box-shadow:var(--shadow); border:1px solid rgba(15,60,120,0.08)}
+    .card h2, .card h3{color:var(--blue); margin-bottom:0.8rem}
+
+    /* Sidebar */
+    .sidebar .card{margin-bottom:1.5rem}
+    .sidebar h3{color:var(--blue)}
+    .map{border-radius:var(--radius); overflow:hidden; box-shadow:var(--shadow)}
+    .map iframe{width:100%; height:220px; border:0; display:block}
+
+    /* Staff Directory */
+    .staff-list{display:flex; flex-direction:column; gap:0.8rem}
+    .staff{display:flex; gap:0.8rem; align-items:center; padding:0.8rem; background:var(--light-bg); border-radius:6px; transition:var(--transition)}
+    .staff:hover{background:rgba(15,60,120,0.08); transform:translateX(3px)}
+    .avatar{width:50px; height:50px; border-radius:50%; overflow:hidden; background:var(--white); flex-shrink:0}
+    .avatar img{width:100%; height:100%; object-fit:cover}
+
+    /* Social channels */
+    .card > div a{display:inline-block; padding:0.6rem 1.2rem; margin:0.3rem; background:var(--blue); color:var(--white); text-decoration:none; border-radius:6px; font-weight:600; transition:var(--transition)}
+    .card > div a:hover{background:var(--blue-dark); transform:translateY(-2px)}
+
+    /* Footer */
+    footer{margin-top:2rem; text-align:center; color:var(--muted); padding:1.5rem; background:var(--white); border-top:1px solid rgba(15,60,120,0.1)}
+    footer a{color:var(--blue); text-decoration:none}
+    footer a:hover{text-decoration:underline}
+
+    /* Focus states */
+    a:focus, button:focus, input:focus{outline:3px solid rgba(15,60,120,0.3); outline-offset:2px; border-radius:4px}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <a class="brand" href="index.html">
+        <img src="Image2/logo.jpeg" alt="Dept logo" style="width:46px; border-radius:50%; background-color: white">
+        <span>Department of Computing &amp; Informatics</span>
+        <link rel="stylesheet" href="style.css" />
+      </a>
+     <nav class="main-nav" id="mainNav" aria-label="Primary navigation">
+                <a href="index.html" class="active">Home</a>
+                <a href="about.html">About</a>
+                <a href="events.html">News & Events</a>
+                <a href="admissions.html">Admission</a>s
+                <a href="contact.html" class="active">Contact</a>
+               
+            </nav>
+      </nav>
+    </header>
+
+    <section class="welcome-staff">
+        <div>
+            <h2>Meet Our Staff</h2>
+            <p>Our experienced team is here to assist you with all your needs.</p>
+        </div>
+        <div style="text-align:right">
+            <img src="Image2/Staff.jpeg" alt="Our Dedicated Staff" />
+        </div>
+         <!-- Quick Actions Box -->
+    <div class="quick-actions-box">
+      <a href="staff.html" class="btn">👥 Meet Our Staff and Lecturers</a>
+      <a href="Students Services.html" class="btn outline">📚 Student Services</a>
+    </div>
+    </section>
+
+    <section class="hero">
+      <div style="flex:1">
+        <h1>Contact Us</h1>
+        <p class="lead">We’re here to help. Reach the department for enquiries about admissions, research, events, media requests and student services. Use the form below or the direct contacts for faster response.</p>
+
+        <div class="contacts" aria-label="Contact methods">
+          <div class="method" aria-labelledby="phoneLabel">
+            <div class="icon phone" aria-hidden="true">☎</div>
+            <div class="meta">
+              <h3 id="phoneLabel">Phone (Office)</h3>
+              <div class="helper"><a href="tel:+1234567890">+1 (234) 567-890</a> • Mon–Fri 09:00–17:00</div>
+            </div>
+          </div>
+
+          <div class="method" aria-labelledby="whLabel">
+            <div class="icon whatsapp" aria-hidden="true">WA</div>
+            <div class="meta">
+              <h3 id="whLabel">WhatsApp (Student enquiries)</h3>
+              <div class="helper"><a href="https://wa.me/1234567890" target="_blank" rel="noopener">+1 234 567 890</a> • Quick replies via WhatsApp business</div>
+            </div>
+          </div>
+
+          <div class="method" aria-labelledby="tiktokLabel">
+            <div class="icon social" aria-hidden="true">TT</div>
+            <div class="meta">
+              <h3 id="tiktokLabel">TikTok (Social & outreach)</h3>
+              <div class="helper"><a href="https://www.tiktok.com/@compinfo" target="_blank" rel="noopener">@compinfo</a> • For event clips & student highlights</div>
+            </div>
+          </div>
+
+          <div class="method" aria-labelledby="emailLabel">
+            <div class="icon email" aria-hidden="true">@</div>
+            <div class="meta">
+              <h3 id="emailLabel">Main email</h3>
+              <div class="helper"><a href="mailto:info@computing.example.edu">info@computing.example.edu</a> • Expect replies within 2–3 business days</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="quick-links">
+          <h2>Quick links</h2>
+          <div>
+            <a href="admissions.html">Admissions</a>
+            <a href="research.html">Research enquiries</a>
+            <a href="media.html">Media requests</a>
+            <a href="students-services.html">Student support</a>
+          </div>
+        </div>
+      </div>
+
+      <aside class="sidebar">
+        <div class="card">
+          <h3>Office hours</h3>
+          <p class="helper">Main office: Monday — Friday, 09:00 — 17:00 (closed on public holidays)</p>
+          <div>
+            <div>
+               <strong>Main building</strong>
+                <div style="color:var(--muted); font-size:0.9rem; margin-top:0.2rem">Room 101, Computing Block<br>University Campus, 123 University Ave</div>
+              </div>
+            </div>
+          </div>
+          <div style="margin-top:1rem; text-align:center">
+            <a href="mailto:appointments@computing.example.edu" style="display:inline-block; padding:0.75rem 1.2rem; border-radius:8px; background:var(--blue); color:#fff !important; text-decoration:none; font-weight:700; font-size:0.95rem; transition:all 0.3s ease; box-shadow:0 4px 12px rgba(11, 99, 214, 0.25)" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 16px rgba(11, 99, 214, 0.35)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 12px rgba(11, 99, 214, 0.25)'">Book an appointment</a>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Emergency contact</h3>
+          <p class="helper">For on-campus emergencies during events please call security:</p>
+          <div style="margin-top:1rem; text-align:center">
+            <a href="tel:+256772123456" style="display:inline-block; padding:0.75rem 1.2rem; border-radius:8px; background:var(--blue); color:#fff !important; text-decoration:none; font-weight:700; font-size:0.95rem; transition:all 0.3s ease; box-shadow:0 4px 12px rgba(11, 99, 214, 0.25)" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 16px rgba(11, 99, 214, 0.35)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 12px rgba(11, 99, 214, 0.25)'">Call security</a>
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <div class="grid">
+      <main>
+        <div class="card">
+          <h2>Send us a message</h2>
+          <p class="helper">Use this form for general enquiries. For admissions or media requests choose the specialised links above.</p>
+
+          <form class="contact-form" action="/contact/submit" method="post" novalidate>
+            <div class="row">
+              <input type="text" name="name" placeholder="Full name" required aria-label="Full name">
+              <input type="email" name="email" placeholder="Email address" required aria-label="Email address">
+            </div>
+
+            <div class="row">
+              <input type="tel" name="phone" placeholder="Phone (optional)" aria-label="Phone">
+              <select name="topic" required aria-label="Enquiry topic">
+                <option value="">Select a topic</option>
+                <option value="admissions">Admissions</option>
+                <option value="research">Research collaboration</option>
+                <option value="events">Events & bookings</option>
+                <option value="media">Media enquiry</option>
+                <option value="student-support">Student support</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+
+            <label style="font-weight:600">Message</label>
+            <textarea name="message" placeholder="Tell us about your enquiry..." required aria-label="Message"></textarea>
+
+            <div style="display:flex; gap:0.6rem; align-items:center; justify-content:space-between">
+              <div style="color:var(--muted); font-size:0.9rem">We aim to reply within 2–3 business days.</div>
+              <button class="btn" type="submit">Send message</button>
+            </div>
+          </form>
+        </div>
+      <aside class="sidebar">
+        <div class="card map">
+          <h3>Find us on campus</h3>
+          <!-- Replace src with a real Google Maps embed or university maps link -->
+          <iframe src="https://maps.google.com/maps?q=University%20Campus%20123%20University%20Ave&t=&z=15&ie=UTF8&iwloc=&output=embed" loading="lazy" aria-label="Campus location map"></iframe>
+          <p class="helper">Parking: Visitor parking available at Gate B. Accessible entrance on the north side of the building.</p>
+        </div>
+
+        <div class="card">
+          <h3>Social channels</h3>
+          <p class="helper">Follow us for updates, student stories and event highlights.</p>
+          <div>
+            <a href="https://www.facebook.com/100094211837738/videos/4744007105826252/?mibextid=rS40aB7S9Ucbxw6v" style="display:inline-block; padding:0.75rem 1.2rem; border-radius:8px; background:var(--blue); color:#fff !important; text-decoration:none; font-weight:700; font-size:0.95rem; transition:all 0.3s ease; box-shadow:0 4px 12px rgba(11, 99, 214, 0.25)" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 16px rgba(11, 99, 214, 0.35)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 12px rgba(11, 99, 214, 0.25)'">Facebook</a>
+            <a href="https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://x.com/UnivBugema/status/2032132453813322154&ved=2ahUKEwil6NiH27qTAxVn8LsIHV7uKaAQFnoECC0QAQ&usg=AOvVaw17pMaKywNhXtUjp85lhTeT" style="display:inline-block; padding:0.75rem 1.2rem; border-radius:8px; background:var(--blue); color:#fff !important; text-decoration:none; font-weight:700; font-size:0.95rem; transition:all 0.3s ease; box-shadow:0 4px 12px rgba(11, 99, 214, 0.25)" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 16px rgba(11, 99, 214, 0.35)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 12px rgba(11, 99, 214, 0.25)'">Twitter/X</a>
+            <a href="https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://www.instagram.com/bugemauniversity/&ved=2ahUKEwi-gaL22rqTAxVmhf0HHdCDCDYQFnoECCMQAQ&sqi=2&usg=AOvVaw2DRhuElC1KJSOvtEzHxGaU" style="display:inline-block; padding:0.75rem 1.2rem; border-radius:8px; background:var(--blue); color:#fff !important; text-decoration:none; font-weight:700; font-size:0.95rem; transition:all 0.3s ease; box-shadow:0 4px 12px rgba(11, 99, 214, 0.25)" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 16px rgba(11, 99, 214, 0.35)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 12px rgba(11, 99, 214, 0.25)'">Instagram</a>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Privacy & accessibility</h3>
+          <p class="helper">Messages may be stored for administrative purposes. We follow the university privacy policy. If you need alternative contact methods due to disability, email accessibility@computing.example.edu.</p>
+        </div>
+      </aside>
+    </div>
+
+    <footer>
+      © Department of Computing &amp; Informatics • Main: <a href="tel:+1234567890">+1 (234) 567-890</a> • media@computing.example.edu
+    </footer>
+  </div>
+
+  <script>
+    // Small client-side enhancements: smooth external links and form validation hint
+    (function(){
+      // Open external links in new tab safely
+      const external = Array.from(document.querySelectorAll('a[target="_blank"]'));
+      external.forEach(a => a.setAttribute('rel','noopener'));
+
+      // Simple client validation feedback on submit
+      const form = document.querySelector('.contact-form');
+      if(form){
+        form.addEventListener('submit', function(e){
+          const name = form.querySelector('[name="name"]');
+          const email = form.querySelector('[name="email"]');
+          const topic = form.querySelector('[name="topic"]');
+          const message = form.querySelector('[name="message"]');
+          let valid = true;
+          [name, email, topic, message].forEach(f => {
+            if(!f.value || (f === email && !/^\S+@\S+\.\S+$/.test(f.value))){
+              f.style.borderColor = 'crimson';
+              valid = false;
+            } else {
+              f.style.borderColor = 'rgba(11,99,214,0.08)';
+            }
+          });
+          if(!valid){
+            e.preventDefault();
+            alert('Please complete the required fields and enter a valid email address.');
+            name.focus();
+          }
+        });
+      }
+    })();
+  </script>
+</body>
+</html>
