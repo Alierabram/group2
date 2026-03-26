@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Timetable — Department of Computing & Informatics</title>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+        :root {
+            --blue: #0b63d6;
+            --blue-dark: #094fa8;
+            --white: #ffffff;
+            --muted: #5b6470;
+            --container: 1140px;
+            --radius: 12px;
+            --shadow: 0 8px 24px rgba(11, 99, 214, 0.08);
+            --accent: #eaf3ff;
+        }
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial;
+            color: #052033;
+            background: linear-gradient(180deg, #fbfdff, #ffffff);
+            -webkit-font-smoothing: antialiased;
+        }
+        .container { max-width: var(--container); margin: 0 auto; padding: 1rem; }
+        header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.5rem 0;
+        }
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            color: var(--blue);
+            font-weight: 700;
+            text-decoration: none;
+        }
+        .brand img {
+            width: 46px;
+            height: auto;
+            border-radius: 50%;
+            background-color: white;
+        }
+        nav {
+            margin-left: auto;
+            display: flex;
+            gap: 0.6rem;
+        }
+        nav a {
+            padding: 0.45rem 0.7rem;
+            border-radius: 8px;
+            font-weight: 600;
+            color: var(--blue);
+        }
+        nav a:hover { background: rgba(11, 99, 214, 0.06); }
+
+        .hero {
+            margin-top: 0.6rem;
+            text-align: center;
+            padding: 1rem;
+            background: var(--white);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+        }
+        .hero h1 {
+            margin: 0;
+            color: var(--blue);
+        }
+        .hero p {
+            margin: 0.5rem 0 0 0;
+            color: var(--muted);
+        }
+
+        .timetable {
+            margin-top: 1rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1rem;
+        }
+        .day-card {
+            background: var(--white);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 1rem;
+        }
+        .day-title {
+            background: var(--blue);
+            color: var(--white);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-weight: 700;
+            margin-bottom: 0.8rem;
+            text-align: center;
+        }
+        .course-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.6rem;
+            border-radius: 8px;
+            background: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+        .course-name {
+            font-weight: 600;
+            color: var(--blue);
+        }
+        .course-time {
+            color: var(--muted);
+            font-size: 0.9rem;
+        }
+        .no-classes {
+            text-align: center;
+            color: var(--muted);
+            font-style: italic;
+            padding: 1rem;
+        }
+
+        footer {
+            margin-top: 1.2rem;
+            text-align: center;
+            color: var(--muted);
+            padding-bottom: 1rem;
+        }
+        a:focus, button:focus, input:focus {
+            outline: 3px solid rgba(11, 99, 214, 0.18);
+            outline-offset: 2px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <a class="brand" href="index.html">
+                <img src="Image2/logo.jpeg" alt="Dept logo">
+                <span>Department of Computing &amp; Informatics</span>
+            </a>
+            <nav aria-label="Main navigation">
+                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="academics.html">Academics</a>
+                <a href="admissions.html">Admission</a>
+                <a href="events.html">News & Events</a>
+                <a href="contact.html">Contact</a>
+            </nav>
+        </header>
+
+        <section class="hero">
+            <h1>Course Timetable</h1>
+            <p>Weekly schedule for computing courses. Stay updated with class timings and locations.</p>
+        </section>
+
+        <div class="timetable">
+            <div class="day-card">
+                <div class="day-title">Monday</div>
+                <div class="course-item">
+                    <div class="course-name">Window Client</div>
+                    <div class="course-time">7:00 - 9:00 AM</div>
+                </div>
+                <div class="course-item">
+                    <div class="course-name">Computer Network & Data Communication</div>
+                    <div class="course-time">9:00 - 11:00 AM</div>
+                </div>
+            </div>
+
+            <div class="day-card">
+                <div class="day-title">Tuesday</div>
+                <div class="course-item">
+                    <div class="course-name">Linux</div>
+                    <div class="course-time">9:00 - 11:00 AM</div>
+                </div>
+                <div class="course-item">
+                    <div class="course-name">Android Programming</div>
+                    <div class="course-time">11:00 - 1:00 PM</div>
+                </div>
+            </div>
+
+            <div class="day-card">
+                <div class="day-title">Wednesday</div>
+                <div class="no-classes">No Classes</div>
+            </div>
+
+            <div class="day-card">
+                <div class="day-title">Thursday</div>
+                <div class="course-item">
+                    <div class="course-name">Computer Network</div>
+                    <div class="course-time">9:00 - 11:00 AM</div>
+                </div>
+                <div class="course-item">
+                    <div class="course-name">UI & UX</div>
+                    <div class="course-time">11:00 - 1:00 PM</div>
+                </div>
+                <div class="course-item">
+                    <div class="course-name">Internet & Web Design</div>
+                    <div class="course-time">1:00 - 3:00 PM</div>
+                </div>
+            </div>
+
+            <div class="day-card">
+                <div class="day-title">Friday</div>
+                <div class="no-classes">No Classes</div>
+            </div>
+        </div>
+
+        <footer>
+            © Department of Computing & Informatics • For enquiries email info@computing.example.edu
+        </footer>
+    </div>
+</body>
+</html>
