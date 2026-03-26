@@ -205,7 +205,7 @@ nav a.active {
 }
 
 .home .hero {
-    background-image: linear-gradient(rgba(6, 36, 70, 0.55), rgba(6, 36, 70, 0.55)), url('Image2/Building1.jpeg');
+    background-image: linear-gradient(rgba(6, 36, 70, 0.55), rgba(6, 36, 70, 0.55)), url('Image2/Staff.jpeg');
     background-size: cover;
     background-position: 50% 35%;
     color: #fff;
