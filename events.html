@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News & Events</title>
+    <link rel="stylesheet"href="style.css">
+</head>
+<body>
+   <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>News & Events — Department of Computing & Informatics</title>
+  <meta name="description" content="Latest news, events, sports updates and media resources from the Department of Computing & Informatics." />
+  <style>
+    :root{
+      --blue:#0b63d6;
+      --blue-dark:#094fa8;
+      --white:#ffffff;
+      --muted:#5b6470;
+      --container:1140px;
+      --radius:12px;
+      --shadow:0 8px 24px rgba(11,99,214,0.08);
+      --accent:#eaf3ff;
+    }
+    *{box-sizing:border-box}
+    body{margin:0; font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial; color:#052033; background:linear-gradient(180deg,#fbfdff,#ffffff); -webkit-font-smoothing:antialiased}
+    .container{max-width:var(--container); margin:0 auto; padding:1rem}
+    header{display:flex; align-items:center; gap:1rem; padding:0.5rem 0}
+    .brand{display:flex; align-items:center; gap:0.8rem; color:var(--blue); font-weight:700; text-decoration:none}
+    .brand img{width:46px; height:auto; border-radius:50%; background-color: white}
+    nav{margin-left:auto; display:flex; gap:0.6rem}
+    nav a{padding:0.45rem 0.7rem; border-radius:8px; font-weight:600; color:var(--blue)}
+    nav a:hover{background:rgba(11,99,214,0.06)}
+
+    .hero{margin-top:0.6rem; display:flex; gap:1rem; align-items:flex-start}
+    .hero-left{flex:2}
+    .hero-right{flex:1; display:flex; flex-direction:column; gap:0.8rem}
+
+    .card{background:var(--white); border-radius:var(--radius); padding:1.5rem; box-shadow:0 8px 24px rgba(11,99,214,0.08); border:1px solid rgba(11,99,214,0.08); transition:all 0.3s ease}
+    .card:hover{box-shadow:0 12px 32px rgba(11,99,214,0.12)}
+
+    /* Slider / carousel */
+    .carousel{position:relative; overflow:hidden; border-radius:12px; box-shadow:0 10px 32px rgba(11,99,214,0.15)}
+    .slides{display:flex; transition:transform 0.5s ease}
+    .slide{min-width:100%; position:relative; color:#fff; display:flex; align-items:flex-end; padding:1.5rem; height:360px; background-size:cover; background-position:center}
+    .slide .overlay{background:linear-gradient(180deg, rgba(11,99,214,0.12), rgba(11,99,214,0.6)); width:100%; padding:1.2rem; border-radius:10px; backdrop-filter:blur(4px)}
+    .slide h3{margin:0 0 0.5rem 0; font-size:1.5rem; font-weight:800; text-shadow:0 2px 8px rgba(0,0,0,0.3)}
+    .slide p{margin:0.4rem 0; font-size:1rem; text-shadow:0 1px 4px rgba(0,0,0,0.2); line-height:1.4}
+    .carousel-controls{position:absolute; left:10px; right:10px; top:10px; display:flex; justify-content:space-between; z-index:10}
+    .carousel-button{background:rgba(255,255,255,0.9); border-radius:50%; width:40px; height:40px; display:flex; align-items:center; justify-content:center; cursor:pointer; color:var(--blue); font-weight:700; border:none; transition:all 0.2s; box-shadow:0 2px 8px rgba(0,0,0,0.15)}
+    .carousel-button:hover{background:var(--white); transform:scale(1.1); box-shadow:0 4px 12px rgba(0,0,0,0.2)}
+    .carousel-indicators{position:absolute; left:50%; transform:translateX(-50%); bottom:16px; display:flex; gap:8px; z-index:10}
+
+    .dot{width:10px; height:10px; border-radius:50%; background:rgba(255,255,255,0.6); cursor:pointer}
+    .dot.active{background:var(--blue)}
+
+    /* News list */
+    .news-list{margin-top:1rem; display:grid; gap:1.2rem}
+    .news-item{display:flex; gap:1rem; align-items:flex-start; border-radius:12px; overflow:hidden; transition:all 0.3s ease; box-shadow:0 6px 16px rgba(11,99,214,0.1)}
+    .news-item:hover{transform:translateY(-6px); box-shadow:0 12px 28px rgba(11,99,214,0.18)}
+    .news-thumb{flex:0 0 180px; height:140px; border-radius:10px; overflow:hidden; background:linear-gradient(135deg, #eaf3ff, #f7faff); border:2px solid rgba(11,99,214,0.12)}
+    .news-thumb img{width:100%; height:100%; object-fit:cover; display:block; transition:transform 0.3s ease}
+    .news-item:hover .news-thumb img{transform:scale(1.08)}
+    .news-body{flex:1; padding:0.5rem 0.5rem 0 0}
+    .news-meta{color:var(--muted); font-size:0.85rem; margin-bottom:0.5rem; font-weight:600}
+    .tag{display:inline-block; padding:0.25rem 0.6rem; border-radius:6px; font-size:0.75rem; background:linear-gradient(135deg, var(--blue), var(--blue-dark)); color:#fff !important; margin-right:0.4rem; font-weight:600}
+
+    /* Filters & Search */
+    .filters{display:flex; gap:0.6rem; align-items:center; flex-wrap:wrap}
+    .filters input[type="search"]{padding:0.6rem 0.8rem; border-radius:8px; border:1px solid rgba(11,99,214,0.08); min-width:180px}
+    .filter-select{padding:0.6rem 0.8rem; border-radius:8px; border:1px solid rgba(11,99,214,0.08)}
+
+    /* Events column */
+    .events-list{display:flex; flex-direction:column; gap:0.9rem}
+    .event{display:flex; gap:0.9rem; align-items:flex-start; border-radius:10px; padding:1rem; border:2px solid rgba(11,99,214,0.1); background:linear-gradient(135deg, #ffffff 0%, #f7faff 100%); transition:all 0.3s ease; box-shadow:0 4px 12px rgba(11,99,214,0.08)}
+    .event:hover{transform:translateY(-4px); box-shadow:0 8px 20px rgba(11,99,214,0.15); border-color:rgba(11,99,214,0.2)}
+    .event .date{min-width:70px; background:linear-gradient(135deg,var(--blue),var(--blue-dark)); color:#fff; padding:0.7rem 0.5rem; border-radius:8px; text-align:center; font-weight:700; box-shadow:0 4px 10px rgba(11,99,214,0.2)}
+    .event .date, .event .date *{color:#fff !important;}
+    .event strong{color:var(--blue-dark); font-size:0.98rem}
+
+    /* Sports section */
+    .sports-slideshow{border-radius:10px; overflow:hidden}
+    .sports-thumbs{display:flex; gap:0.5rem; margin-top:0.6rem}
+    .thumb{flex:1; height:80px; background:#f3f7ff; border-radius:8px; overflow:hidden; cursor:pointer}
+    .thumb img{width:100%; height:100%; object-fit:cover}
+
+    /* Responsive grid */
+    .main-grid{display:grid; grid-template-columns:2fr 1fr; gap:1rem; margin-top:1rem}
+    @media(max-width:980px){ .main-grid{grid-template-columns:1fr} .hero{flex-direction:column} }
+
+    footer{margin-top:1.2rem; text-align:center; color:var(--muted); padding-bottom:1rem}
+
+    /* Accessibility focus */
+    a:focus, button:focus, input:focus{outline:3px solid rgba(11,99,214,0.18); outline-offset:2px}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <a class="brand" href="index.html">
+        <img src="Image2/logo.jpeg" alt="Dept logo">
+        <span>Department of Computing &amp; Informatics</span>
+        <link rel="stylesheet" href="style.css" />
+      </a>
+      <nav aria-label="Main navigation">
+       <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="academics.html">Academics</a>
+        <a href="admissions.html">Admission</a>
+        <a href="events.html">News & Events</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </header>
+
+    <!-- Hero with carousel and quick upcoming events -->
+    <section class="hero">
+      <div class="hero-left card">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.6rem">
+          <h2 style="margin:0; color:var(--blue)">Featured</h2>
+          <div style="color:var(--muted); font-weight:600">Highlights & announcements</div>
+        </div>
+
+        <div class="carousel" aria-roledescription="carousel" aria-label="Featured news and events">
+          <div class="carousel-controls" aria-hidden="true">
+            <button class="carousel-button" id="prevBtn" aria-label="Previous slide">&lt;</button>
+            <button class="carousel-button" id="nextBtn" aria-label="Next slide">&gt;</button>
+          </div>
+
+          <div id="slidesContainer" class="slides" style="transform:translateX(0%)">
+            <article class="slide" style="background-image:url('images/freshers-ball.jpg');" aria-label="Freshers Ball today at 4:00 pm">
+              <div class="overlay card" style="background:linear-gradient(180deg, rgba(11,99,214,0.15), rgba(11,99,214,0.65)); color:#fff">
+                <h3>🎉 Freshers Ball — Last Week Recap</h3>
+                <p style="margin:0.35rem 0">A night of celebration, music, games and new friendships. Our freshman students had an amazing experience!</p>
+                <img src="Image2/Fresher Ball.jpeg" alt="Freshers Ball photo" style="width:100%; border-radius:8px; margin-top:0.8rem; object-fit:cover; max-height:150px; border:2px solid rgba(255,255,255,0.2); box-shadow:0 6px 16px rgba(0,0,0,0.2)">
+              </div>
+            </article>
+
+            <!-- Slide 2 -->
+            <article class="slide" style="background-image:url('images/busa-election.jpg');" aria-label="BUSA Election 07 April 2026">
+              <div class="overlay card" style="background:linear-gradient(180deg, rgba(11,99,214,0.15), rgba(11,99,214,0.65)); color:#fff">
+                <h3>🗳️ BUSA Election Coming Soon!</h3>
+                <p style="margin:0.35rem 0">07 April 2026 • Cast your vote for student leaders and representatives. Your voice matters!</p>
+                <img src="Image2/Busa.jpeg" alt="BUSA Election photo" style="width:100%; border-radius:8px; margin-top:0.8rem; object-fit:cover; max-height:150px; border:2px solid rgba(255,255,255,0.2); box-shadow:0 6px 16px rgba(0,0,0,0.2)">
+              </div>
+            </article>
+
+            <!-- Slide 3 -->
+            <article class="slide" style="background-image:url('images/midsemester-exams.jpg');" aria-label="Mid semester exams 30 March 2026">
+              <div class="overlay card" style="background:linear-gradient(180deg, rgba(11,99,214,0.15), rgba(11,99,214,0.65)); color:#fff">
+                <h3>📚 Mid Semester Exams — 30 March</h3>
+                <p style="margin:0.35rem 0">Review your timetable, organize your study materials, and arrive early at exam halls.</p>
+                <img src="Image2/Exam.jpeg" alt="Mid Semester Exams photo" style="width:100%; border-radius:8px; margin-top:0.8rem; object-fit:cover; max-height:150px; border:2px solid rgba(255,255,255,0.2); box-shadow:0 6px 16px rgba(0,0,0,0.2)">
+              </div>
+            </article>
+
+            <!-- Slide 4 -->
+            <article class="slide" style="background-image:url('images/football-next-week.jpg');" aria-label="Football match last week">
+              <div class="overlay card" style="background:linear-gradient(180deg, rgba(11,99,214,0.15), rgba(11,99,214,0.65)); color:#fff">
+                <h3>⚽ Football Victory — Last Week Highlights</h3>
+                <p style="margin:0.35rem 0">Computing & Informatics dominated in an epic interdepartmental match. Congratulations to our players!</p>
+                <img src="Image2/Team.jpeg" alt="Football Match photo" style="width:100%; border-radius:8px; margin-top:0.8rem; object-fit:cover; max-height:150px; border:2px solid rgba(255,255,255,0.2); box-shadow:0 6px 16px rgba(0,0,0,0.2)">
+              </div>
+            </article>
+          </div>
+
+          <div class="carousel-indicators" role="tablist" aria-hidden="false">
+            <button class="dot active" data-index="0" aria-label="Slide 1"></button>
+            <button class="dot" data-index="1" aria-label="Slide 2"></button>
+            <button class="dot" data-index="2" aria-label="Slide 3"></button>
+            <button class="dot" data-index="3" aria-label="Slide 4"></button>
+          </div>
+        </div>
+      </div>
+
+      <aside class="hero-right">
+        <div class="card">
+          <h3 style="margin:0 0 1rem 0; color:var(--blue); font-size:1.15rem; font-weight:700">⏰ Upcoming Events</h3>
+          <div class="events-list">
+            <div class="event">
+              <div class="date">30<br>Mar</div>
+              <div>
+                <strong>Mid Semester Exams</strong>
+                <div style="color:var(--muted); font-size:0.9rem; margin-top:0.2rem">Exam halls • Review timetable • Arrive early</div>
+              </div>
+            </div>
+
+            <div class="event">
+              <div class="date">07<br>Apr</div>
+              <div>
+                <strong>BUSA Election</strong>
+                <div style="color:var(--muted); font-size:0.9rem; margin-top:0.2rem">Town Hall • Cast your vote • Student leaders</div>
+              </div>
+            </div>
+
+          <div style="margin-top:1rem; text-align:center">
+            <a href="https://bugemauniv.ac.ug" style="display:inline-block; padding:0.75rem 1.2rem; border-radius:8px; background:var(--blue); color:#fff !important; text-decoration:none; font-weight:700; font-size:0.95rem; transition:all 0.3s ease; box-shadow:0 4px 12px rgba(11, 99, 214, 0.25)" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 16px rgba(11, 99, 214, 0.35)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 12px rgba(11, 99, 214, 0.25)'">View full events calendar</a>
+          </div>
+        </div>
+
+        <div class="card" style="margin-top:0.9rem">
+          <h3 style="margin:0 0 0.5rem 0; color:var(--blue)">Subscribe</h3>
+          <p style="margin:0 0 0.6rem 0; color:var(--muted)">Receive weekly news and event highlights.</p>
+            <a href="https://youtube.com/@bugemauniversity3502?si=BkD6F-e4s1tOHNTx" style="display:inline-block; padding:0.75rem 1.2rem; border-radius:8px; background:var(--blue); color:#fff !important; border:none; font-weight:700; text-decoration:none; font-size:0.95rem; transition:all 0.3s ease; box-shadow:0 4px 12px rgba(11, 99, 214, 0.25)" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 16px rgba(11, 99, 214, 0.35)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 12px rgba(11, 99, 214, 0.25)'">Subscribe</a>
+            <input type="email" name="email" placeholder="you@domain.com" style="width:100%; padding:0.6rem; border-radius:8px; border:1px solid rgba(11,99,214,0.08)">
+            <div style="margin-top:0.6rem; text-align:center">
+            </div>
+          </form>
+        </div>
+      </aside>
+    </section>
+
+    <div class="main-grid">
+      <!-- Main content column -->
+      <main>
+        <div class="card">
+          <div style="display:flex; justify-content:space-between; align-items:center; gap:1rem; margin-bottom:1rem">
+            <div>
+              <h2 style="margin:0; color:var(--blue); font-size:1.3rem; font-weight:700">📰 Latest News</h2>
+              <div style="color:var(--muted); font-weight:600; font-size:0.9rem">Highlights from campus life</div>
+            </div>
+
+            <div class="filters" aria-hidden="false">
+              <select class="filter-select" id="categoryFilter" aria-label="Filter by category">
+                <option value="">All categories</option>
+                <option value="announcements">Announcements</option>
+                <option value="student-life">Student life</option>
+                <option value="sports">Sports</option>
+              </select>
+            </div>
+          </div>
+
+          <div id="newsList" class="news-list" aria-live="polite">
+            <!-- News item 1: Freshers Ball -->
+            <article class="news-item card" aria-labelledby="news1">
+              <div class="news-thumb" aria-hidden="true"><img src="Image2/Fresher Ball.jpeg" alt="Freshers Ball photo"></div>
+              <div class="news-body">
+                <div class="news-meta"><span class="tag">Student Life</span> Last Week</div>
+                <h3 id="news1" style="margin:0; color:var(--blue); font-weight:700"><a href="news/freshers-ball.html" style="color:var(--blue); text-decoration:none">Freshers Ball — A Night to Remember 🎉</a></h3>
+                <p style="margin:0.6rem 0 0 0; color:var(--muted); line-height:1.5">An exciting welcome event for new students featuring music, games, and campus celebration. Students enjoyed entertainment and made lasting friendships.</p>
+              </div>
+            </article>
+
+            <!-- News item 2: Football -->
+            <article class="news-item card" aria-labelledby="news2">
+              <div class="news-thumb" aria-hidden="true"><img src="Image2/Team.jpeg" alt="Football match photo"></div>
+              <div class="news-body">
+                <div class="news-meta"><span class="tag">Sports</span> Last Week</div>
+                <h3 id="news2" style="margin:0; color:var(--blue); font-weight:700"><a href="news/football-match.html" style="color:var(--blue); text-decoration:none">Computing & Informatics Win Epic Football Match ⚽</a></h3>
+                <p style="margin:0.6rem 0 0 0; color:var(--muted); line-height:1.5">Our team dominated the interdepartmental football league with an impressive victory. Great performance from all players in this thrilling match!</p>
+              </div>
+            </article>
+
+            <!-- News item 3: Sports Highlights -->
+            <article class="news-item card" aria-labelledby="news3">
+              <div class="news-thumb" aria-hidden="true"><img src="Image2/Sp.jpeg" alt="Sports highlights"></div>
+              <div class="news-body">
+                <div class="news-meta"><span class="tag">Sports</span> Recent</div>
+                <h3 id="news3" style="margin:0; color:var(--blue); font-weight:700"><a href="news/sports-roundup.html" style="color:var(--blue); text-decoration:none">Weekly Sports Roundup — Top Performers Announced 🏆</a></h3>
+                <p style="margin:0.6rem 0 0 0; color:var(--muted); line-height:1.5">Recognition of outstanding athletic performances across multiple sports competitions. Congratulations to all champions and participants!</p>
+              </div>
+            </article>
+          </div>
+
+          <div style="margin-top:1rem; text-align:center">
+            <a href="https://bugemauniv.ac.ug/fitness-athletics/" style="color:var(--blue); font-weight:700; text-decoration:none; display:inline-block; padding:0.5rem 1rem; border-radius:6px; transition:all 0.3s" onmouseover="this.style.background='rgba(11,99,214,0.08)'" onmouseout="this.style.background='transparent'">Browse all news →</a>
+          </div>
+        </div>
+
+        <!-- Press & Media -->
+        <section class="card" style="margin-top:1rem">
+          <h2 style="margin:0 0 0.6rem 0; color:var(--blue)">Press & Media</h2>
+          <p style="margin:0 0 0.6rem 0; color:var(--muted)">Media contacts, press releases, downloadable images and logos for publicity. Journalists may request interviews and expert commentary.</p>
+          <div style="display:flex; gap:0.6rem; flex-wrap:wrap">
+            <a href="media/press-release-2026-04.pdf" style="padding:0.6rem 0.9rem; border-radius:8px; border:1px solid rgba(11,99,214,0.08); color:var(--blue); text-decoration:none">Latest press release</a>
+            <a href="media/press-kit.zip" style="padding:0.6rem 0.9rem; border-radius:8px; border:1px solid rgba(11,99,214,0.08); color:var(--blue); text-decoration:none">Media kit & logos</a>
+            <a href="https://www.tiktok.com/@bugemauniv.update?_r=1&_t=ZS-94rqkijyWNJ" style="padding:0.75rem 1.2rem; border-radius:8px; background:var(--blue); color:#fff !important; text-decoration:none; font-weight:700; font-size:0.95rem; transition:all 0.3s ease; box-shadow:0 4px 12px rgba(11, 99, 214, 0.25)" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 16px rgba(11, 99, 214, 0.35)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 12px rgba(11, 99, 214, 0.25)'">Contact media office</a>
+          </div>
+        </section>
+      </main>
+
+      <!-- Sidebar column -->
+      <aside>
+        <div class="card">
+          <h3 style="margin:0 0 0.8rem 0; color:var(--blue); font-size:1.15rem; font-weight:700">⚽ Sports & Athletics</h3>
+          <p style="margin:0 0 1rem 0; color:var(--muted); font-size:0.9rem">Latest match results, fixtures and player highlights.</p>
+
+          <div class="sports-slideshow" style="border-radius:12px; overflow:hidden; box-shadow:0 8px 24px rgba(11,99,214,0.15); transition:all 0.3s">
+            <img id="sportsMain" src="Image2/Sp.jpeg" alt="Sports slide" style="width:100%; height:240px; object-fit:cover; display:block; transition:transform 0.3s" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+          </div>
+          <div style="margin-top:1rem">
+            <a href="https://bugemauniv.ac.ug/fitness-athletics/" style="display:inline-block; padding:0.75rem 1.2rem; border-radius:8px; background:var(--blue); color:#fff !important; text-decoration:none; font-weight:700; font-size:0.95rem; transition:all 0.3s ease; box-shadow:0 4px 12px rgba(11, 99, 214, 0.25)" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 16px rgba(11, 99, 214, 0.35)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 12px rgba(11, 99, 214, 0.25)'">All sports news</a>
+          </div>
+        </div>
+
+        <div class="card" style="margin-top:0.9rem">
+          <h3 style="margin:0 0 0.5rem 0; color:var(--blue)">Event resources</h3>
+          <ul style="margin:0; padding-left:1.1rem; color:var(--muted)">
+            <li><a href="events/venue-map.pdf" style="color:var(--blue); text-decoration:none">Venue maps & accessibility</a></li>
+            <li><a href="events/health-safety.pdf" style="color:var(--blue); text-decoration:none">Health & safety guidelines</a></li>
+            <li><a href="events/photography-policy.html" style="color:var(--blue); text-decoration:none">Photography policy</a></li>
+          </ul>
+        </div>
+
+        <div class="card" style="margin-top:0.9rem">
+          <h3 style="margin:0 0 0.5rem 0; color:var(--blue)">Quick links</h3>
+          <div style="display:flex; flex-direction:column; gap:0.5rem">
+            <a href="calendar.ics" style="color:var(--blue); text-decoration:none">Add to calendar (iCal)</a>
+            <a href="events/rsvp.html" style="color:var(--blue); text-decoration:none">RSVP for events</a>
+            <a href="volunteer.html" style="color:var(--blue); text-decoration:none">Volunteer at events</a>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <footer>
+      © Department of Computing &amp; Informatics • For media enquiries email media@computing.example.edu
+    </footer>
+  </div>
+
+  <script>
+    // Simple carousel behavior (no external libs) and sports thumbnail switching
+    (function(){
+      const slides = document.getElementById('slidesContainer');
+      const dots = Array.from(document.querySelectorAll('.dot'));
+      const prevBtn = document.getElementById('prevBtn');
+      const nextBtn = document.getElementById('nextBtn');
+      let current = 0;
+      const total = dots.length;
+
+      function goTo(index){
+        current = (index + total) % total;
+        slides.style.transform = 'translateX(' + (-current * 100) + '%)';
+        dots.forEach((d,i)=> d.classList.toggle('active', i===current));
+      }
+
+      prevBtn.addEventListener('click', ()=> goTo(current-1));
+      nextBtn.addEventListener('click', ()=> goTo(current+1));
+      dots.forEach(d => d.addEventListener('click', e => goTo(Number(e.target.dataset.index))));
+
+      // Auto-advance
+      let auto = setInterval(()=> goTo(current+1), 7000);
+      [prevBtn, nextBtn, ...dots].forEach(el => el.addEventListener('mouseenter', ()=> clearInterval(auto)));
+      [prevBtn, nextBtn, ...dots].forEach(el => el.addEventListener('mouseleave', ()=> auto = setInterval(()=> goTo(current+1), 7000)));
+
+      // Sports thumbnails switcher
+      const sportsMain = document.getElementById('sportsMain');
+      const thumbs = Array.from(document.querySelectorAll('.thumb'));
+      thumbs.forEach(t => {
+        t.addEventListener('click', ()=> sportsMain.src = t.dataset.src);
+        t.addEventListener('keypress', (e)=> { if(e.key === 'Enter' || e.key === ' ') sportsMain.src = t.dataset.src });
+      });
+
+      // Basic client-side filters for news (search + category)
+      const newsItems = Array.from(document.querySelectorAll('#newsList .news-item'));
+      const search = document.getElementById('newsSearch');
+      const filter = document.getElementById('categoryFilter');
+
+      function filterNews(){
+        const q = search.value.trim().toLowerCase();
+        const cat = filter.value;
+        newsItems.forEach(item => {
+          const text = item.innerText.toLowerCase();
+          const tags = Array.from(item.querySelectorAll('.tag')).map(t=>t.innerText.toLowerCase());
+          const matchesQuery = q === '' || text.includes(q);
+          const matchesCat = cat === '' || tags.includes(cat);
+          item.style.display = (matchesQuery && matchesCat) ? 'flex' : 'none';
+        });
+      }
+      search.addEventListener('input', filterNews);
+      filter.addEventListener('change', filterNews);
+    })();
+  </script>
+</body>
+</html>
